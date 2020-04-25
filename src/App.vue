@@ -15,6 +15,8 @@ export default {
 }
 </script>
 <style lang="scss">
+@import './assets/fonts/tinyhand/style.css';
+
 html{
   height: 100%;
 }
