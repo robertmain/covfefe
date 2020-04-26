@@ -16,7 +16,8 @@ export default {
     },
     speech: {
       type: String,
-      required: true,
+      required: false,
+      default: '',
     }
   },
   computed: {

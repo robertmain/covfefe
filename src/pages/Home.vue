@@ -3,7 +3,16 @@
     <cvs ref="canvas" :image="image" :speech="trumpQuote"></cvs>
     <div class="sidebar">
       <Heading level="3">Type Your Text Below</Heading><br />
-      <textarea placeholder="Many people say..." @keyup="rerenderCanvas" v-model="trumpQuote" cols="30" rows="15"></textarea>
+      <textarea
+        placeholder="Many people say..."
+        @keyup="rerenderCanvas"
+        v-model="rawText" cols="30" rows="10"
+      ></textarea>
+
+      <span class="option">
+        <label for="enableHands">Do The Hands Thing</label>
+        <input type="checkbox" id="enableHands" @change="rerenderCanvas" v-model="addHands" />
+      </span>
     </div>
   </div>
 </template>
@@ -23,10 +32,22 @@ export default {
   data() {
     return {
       image: yelling,
-      trumpQuote: '',
+      addHands: true,
+      rawText: '',
     };
   },
+  computed: {
+    trumpQuote: function() {
+      return this.addHands ? this.trumpize(this.rawText) : this.rawText;
+    },
+  },
   methods: {
+    trumpize: function(text) {
+      const emojiis = ['☝', '👌', '🖐', '👋', '🤏', '👐', '👋'];
+      return text.split(' ')
+        .map((word) => word + (Math.random() >= 0.5 ? emojiis[Math.floor(Math.random() * emojiis.length)] : ''))
+        .join(' ');
+    },
     rerenderCanvas: function() {
       this.$refs.canvas.renderAll();
     }
@@ -54,7 +75,15 @@ div.sidebar{
     font-family: 'Montserrat';
     width: 100%;
     padding: 10px;
+    resize: none;
     box-sizing: border-box;
   }
+}
+.option{
+  margin-top: 20px;
+  display: inline-block;
+  background-color: #AAA;
+  padding: 5px;
+  border: 1px solid #999;
 }
 </style>

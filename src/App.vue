@@ -57,6 +57,8 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  font-family: 'Montserrat';
+  font-size: 14px;
 }
 #app {
   width: 1024px;
