@@ -22,11 +22,11 @@ export default {
 
 <style lang="scss" scoped>
 h1{
-  font-size: 40px;
+  font-size: 45px;
   font-family: 'TinyHand';
 }
 h2{
-  margin-top: -40px;
+  margin-top: 20px;
   color: #555;
 }
 img{

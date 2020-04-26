@@ -1,13 +1,22 @@
 <template>
   <div id="app">
-    <AppTitle />
+    <header>
+      <AppTitle />
+    </header>
     <main>
       <Home />
     </main>
+
+    <footer>
+      <p>
+        Art by <a href="http://theoatmeal.com">Matthew Inman</a>. TinyHand heading font 
+      </p>
+    </footer>
   </div>
 </template>
 
 <script>
+import 'reset.css';
 import AppTitle from './components/AppTitle';
 import Home from './pages/Home.vue';
 
@@ -22,9 +31,6 @@ export default {
 <style lang="scss">
 @import './assets/fonts/tinyhand/style.css';
 
-html{
-  height: 100%;
-}
 body {
   background: conic-gradient(
     orange 0 5%,
@@ -60,7 +66,10 @@ body {
 h1,h2,h3,h4 {
   font-family: 'TinyHand';
 }
-main{
+header{
+  margin-bottom: 40px;
+}
+main, footer{
   background-color: white;
   padding: 20px;
 }
