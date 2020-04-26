@@ -1,15 +1,20 @@
 <template>
   <div id="app">
-    <Home />
+    <AppTitle />
+    <main>
+      <Home />
+    </main>
   </div>
 </template>
 
 <script>
+import AppTitle from './components/AppTitle';
 import Home from './pages/Home.vue';
 
 export default {
   name: 'App',
   components: {
+    AppTitle,
     Home,
   }
 }
@@ -47,11 +52,16 @@ body {
   background-attachment: fixed;
 }
 #app {
-  background-color: white;
-  padding: 20px;
   width: 1024px;
   margin: 40px auto;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   color: #2c3e50;
+}
+h1,h2,h3,h4 {
+  font-family: 'TinyHand';
+}
+main{
+  background-color: white;
+  padding: 20px;
 }
 </style>
