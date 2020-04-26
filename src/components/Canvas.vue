@@ -55,7 +55,7 @@ export default {
 
       ctx.font = '14px Montserrat';
       ctx.fillStyle = 'white';
-      ctx.fillText(`Make your own @ ${window.location.href}`, 20, canvas.height - 15);
+      ctx.fillText(`Make your own @ ${window.location.origin + window.location.pathname}`, 20, canvas.height - 15);
     },
     renderSpeech: async function(canvas, text) {
       const context = canvas.getContext('2d');
