@@ -20,3 +20,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+h1, h2, h3, h4, h5, h6{
+  margin-bottom: 20px;
+}
+</style>
