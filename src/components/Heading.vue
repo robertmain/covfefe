@@ -23,6 +23,9 @@ export default {
 
 <style lang="scss" scoped>
 h1, h2, h3, h4, h5, h6{
+  clear: both;
+  display: block;
+  float: none;
   margin-bottom: 20px;
 }
 </style>

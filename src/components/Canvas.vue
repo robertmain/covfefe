@@ -26,13 +26,13 @@ export default {
         16,
         14,
       ];
-      let size = sizes[0];
-      if(this.speech.length > 228 && this.speech.length < 338) {
-        size = sizes[1]
-      } else if (this.speech.length > 338) {
+      let size;
+      if(this.speech.length < 228) {
+        [size] = sizes
+      } else if (this.speech.length > 228 && this.speech.length < 270) {
+        size = sizes[1];
+      } else {
         size = sizes[2];
-      } else if (this.speech.length < 228 ) {
-        size = sizes[0];
       }
       return size;
     }
@@ -57,35 +57,39 @@ export default {
       ctx.fillStyle = 'white';
       ctx.fillText(`Make your own @ ${window.location.href}`, 20, canvas.height - 15);
     },
-    renderSpeech: function(canvas, text) {
+    renderSpeech: async function(canvas, text) {
       const context = canvas.getContext('2d');
-
-      context.fillStyle = '#555';
+      context.beginPath();
+      context.globalAlpha = 0.2;
+      context.fillRect(canvas.width-320, 20, 300, canvas.height - 80);
+      context.globalAlpha = 1.0;
 
       canvasTxt.font = 'TinyHand';
       canvasTxt.fontSize = this.textSize;
       canvasTxt.align = 'left';
+      canvasTxt.vAlign = 'top';
       canvasTxt.lineHeight = 30;
-      tinyHandFont.load().then(function() {
-        canvasTxt.drawText(context, text, 270, 20, 300, 400);
-      })
+      await tinyHandFont.load();
+      canvasTxt.drawText(context, `${(text.length > 0) ? '"' +text.slice(0, 400) + '"' : ''}`, 290, 40, 250, 400);
     },
+    renderAll: function() {
+      const {canvas} = this.$refs;
+      const ctx = canvas.getContext('2d');
+      const { width, height } = canvas;
+
+      ctx.clearRect(0, 0, width, height);
+      const color1 = '#3b5998';
+
+      ctx.fillStyle = color1;
+      ctx.fillRect(0, 0,  width, height);
+
+      this.renderImage(canvas);
+      this.renderVanity(canvas);
+      this.renderSpeech(canvas, this.speech);
+    }
   },
   mounted() {
-    const {canvas} = this.$refs;
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0,  canvas.width, canvas.height);
-
-    this.renderImage(canvas);
-    this.renderVanity(canvas);
-    this.renderSpeech(canvas, this.speech);
+    this.renderAll();
   }
 }
 </script>
-
-<style lang="scss">
-canvas{
-  border: 1px solid #555;
-}
-</style>
