@@ -9,7 +9,7 @@
 
     <footer>
       <p>
-        Art by <a href="http://theoatmeal.com">Matthew Inman</a>. TinyHand heading font
+        Art by <a href="http://theoatmeal.com">Matthew Inman</a>. TinyHand heading font by <a href="https://www.buzzfeednews.com/article/benking/tiny-hand-will-be-your-new-comic-sans#.ej9Mp8OlY">Mark Davis</a>
       </p>
     </footer>
   </div>
@@ -70,12 +70,21 @@ h1,h2,h3,h4 {
 header{
   margin-bottom: 40px;
 }
-main, footer{
+main{
   background-color: white;
   padding: 20px;
 }
-footer p {
-  font-size: 13px;
+footer{
+  padding: 20px;
+  background-color: #EEE;
+  border-top: 1px solid #DDD;
+  p {
+    font-size: 13px;
+    color: #777;
+    a {
+      color: orange;
+    }
+  }
 }
 p{
   font-family: 'Montserrat', sans-serif;
