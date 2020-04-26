@@ -9,7 +9,7 @@
 
     <footer>
       <p>
-        Art by <a href="http://theoatmeal.com">Matthew Inman</a>. TinyHand heading font 
+        Art by <a href="http://theoatmeal.com">Matthew Inman</a>. TinyHand heading font
       </p>
     </footer>
   </div>
@@ -30,6 +30,7 @@ export default {
 </script>
 <style lang="scss">
 @import './assets/fonts/tinyhand/style.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 body {
   background: conic-gradient(
@@ -72,5 +73,13 @@ header{
 main, footer{
   background-color: white;
   padding: 20px;
+}
+footer p {
+  font-size: 13px;
+}
+p{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
 }
 </style>
