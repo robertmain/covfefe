@@ -1,16 +1,22 @@
 <template>
   <div>
-    <cvs></cvs>
+    <cvs :image="image" speech=""></cvs>
   </div>
 </template>
 
 <script>
 import Canvas from '../components/Canvas';
+import yelling from '@/assets/img/trumps/yelling.png';
 
 export default {
   name: 'Home',
   components: {
     cvs: Canvas,
+  },
+  data() {
+    return {
+      image: yelling,
+    };
   },
 }
 </script>
