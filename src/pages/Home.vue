@@ -1,18 +1,28 @@
 <template>
   <div>
-    <Heading level="2">Pick a Trump</Heading>
+    <cvs></cvs>
   </div>
 </template>
 
 <script>
-import Heading from '../components/Heading';
+import Canvas from '../components/Canvas';
+
 export default {
   name: 'Home',
   components: {
-    Heading,
-  }
+    cvs: Canvas,
+  },
 }
 </script>
 
 <style lang="scss" scoped>
+div{
+  display: grid;
+  grid-template-columns: auto 400px;
+}
+canvas{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  width: 100%;
+}
 </style>
