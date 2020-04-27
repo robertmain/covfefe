@@ -26,6 +26,10 @@ h1, h2, h3, h4, h5, h6{
   clear: both;
   display: block;
   float: none;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  &:first-of-type {
+    margin-top: 0px;
+  }
 }
 </style>

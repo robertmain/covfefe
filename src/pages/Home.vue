@@ -2,6 +2,16 @@
   <div class="grid">
     <cvs ref="canvas" :image="image" :speech="trumpQuote"></cvs>
     <div class="sidebar">
+      <Heading level="3">Choose Your Trump</Heading><br />
+      <ImageTile
+        v-for="(trump, index) in trumps"
+        :isSelected="index === trumpIndex"
+        @click.native="setTrump(index)"
+        :key="trump.image"
+        :name="trump.name"
+        :image="trump.image">
+      </ImageTile>
+
       <Heading level="3">Type Your Text Below</Heading><br />
       <textarea
         placeholder="Many people say..."
@@ -19,34 +29,54 @@
 
 <script>
 import Canvas from '../components/Canvas';
+import ImageTile from '../components/ImageTile';
 import Heading from '../components/Heading';
 
 import yelling from '@/assets/img/trumps/yelling.png';
+import smug from '@/assets/img/trumps/smug.png';
 
 export default {
   name: 'Home',
   components: {
     cvs: Canvas,
     Heading,
+    ImageTile,
   },
   data() {
     return {
-      image: yelling,
       addHands: true,
       rawText: '',
+      trumps: [
+        {
+          name: 'Yelling Trump',
+          image: yelling,
+        },
+        {
+          name: 'Smug Trump',
+          image: smug,
+        },
+      ],
+      trumpIndex: 0,
     };
   },
   computed: {
     trumpQuote: function() {
       return this.addHands ? this.trumpize(this.rawText) : this.rawText;
     },
+    image: function() {
+      return this.trumps[this.trumpIndex].image;
+    }
   },
   methods: {
     trumpize: function(text) {
       const emojiis = ['☝', '👌', '🖐', '👋', '🤏', '👐', '👋'];
       return text.split(' ')
-        .map((word) => word + (Math.random() >= 0.5 ? emojiis[Math.floor(Math.random() * emojiis.length)] : ''))
+        .map((word) => word + (Math.random() >= 0.2 ? emojiis[Math.floor(Math.random() * emojiis.length)] : ''))
         .join(' ');
+    },
+    setTrump: function(trumpIndex) {
+      this.trumpIndex = trumpIndex;
+      this.rerenderCanvas();
     },
     rerenderCanvas: function() {
       this.$refs.canvas.renderAll();
