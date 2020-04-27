@@ -3,14 +3,17 @@
     <cvs ref="canvas" :image="image" :speech="trumpQuote"></cvs>
     <div class="sidebar">
       <Heading level="3">Choose Your Trump</Heading><br />
-      <ImageTile
-        v-for="(trump, index) in trumps"
-        :isSelected="index === trumpIndex"
-        @click.native="setTrump(index)"
-        :key="trump.image"
-        :name="trump.name"
-        :image="trump.image">
-      </ImageTile>
+
+      <div class="trump-container">
+        <ImageTile
+          v-for="(trump, index) in trumps"
+          :isSelected="index === trumpIndex"
+          @click.native="setTrump(index)"
+          :key="trump.image"
+          :name="trump.name"
+          :image="trump.image">
+        </ImageTile>
+      </div>
 
       <Heading level="3">Type Your Text Below</Heading><br />
       <textarea
@@ -88,16 +91,20 @@ div.grid{
   display: grid;
   grid-template-columns: auto 400px;
 }
-canvas{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  width: 100%;
+
+.trump-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
 }
+
 div.sidebar{
   background-color: #EEE;
   grid-column-start: 2;
   overflow: hidden;
   padding: 20px;
+  box-sizing: border-box;
   textarea{
     line-height: 1.5;
     font-family: 'Montserrat';
@@ -108,7 +115,6 @@ div.sidebar{
   }
 }
 .option{
-  margin-top: 20px;
   display: inline-block;
   background-color: #AAA;
   padding: 5px;

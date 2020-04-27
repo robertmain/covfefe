@@ -31,22 +31,15 @@ export default {
 div{
   background-color: white;
   overflow: hidden;
-  width: auto;
-  margin-right: 5px;;
   padding: 5px;
   border: 1px solid #CCC;
-  float: left;
-  margin-bottom: 20px;
   text-align: center;
   &.selected, &:hover{
     background-color: #EEE;
     cursor: pointer;
   }
 }
-
 img{
-  clear: both;
-  max-width: 75px;
   max-height: 75px;
 }
 
