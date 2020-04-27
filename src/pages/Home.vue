@@ -15,7 +15,6 @@
       <Heading level="3">Type Your Text Below</Heading><br />
       <textarea
         placeholder="Many people say..."
-        @keyup="rerenderCanvas"
         v-model="rawText" cols="30" rows="10"
       ></textarea>
 
@@ -76,11 +75,7 @@ export default {
     },
     setTrump: function(trumpIndex) {
       this.trumpIndex = trumpIndex;
-      this.rerenderCanvas();
     },
-    rerenderCanvas: function() {
-      this.$refs.canvas.renderAll();
-    }
   }
 }
 </script>

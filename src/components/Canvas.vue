@@ -1,12 +1,17 @@
 <template>
-  <canvas ref="canvas" width="584px" height="500px"></canvas>
+  <div class="canvas">
+    <img :src="image" />
+    <div class="quote-container">
+      <blockquote :style="{fontSize: `${textSize}px`}">
+        <span v-if="speech.length > 0">&quot;</span>
+          {{speech.slice(0, 280)}}
+        <span v-if="speech.length > 0">&quot;</span>
+      </blockquote>
+      <div class="arrow"></div>
+    </div>
+  </div>
 </template>
 <script>
-import canvasTxt from 'canvas-txt';
-import tinyHand from '@/assets/fonts/tinyhand/tinyhand-webfont.woff';
-
-const tinyHandFont = new FontFace('TinyHand', `url('${tinyHand}')`);
-
 export default {
   name: 'Canvas',
   props: {
@@ -25,12 +30,12 @@ export default {
       const sizes = [
         20,
         16,
-        14,
+        12,
       ];
       let size;
-      if(this.speech.length < 228) {
+      if(this.speech.length < 116) {
         [size] = sizes
-      } else if (this.speech.length > 228 && this.speech.length < 270) {
+      } else if (this.speech.length > 116 && this.speech.length < 246) {
         size = sizes[1];
       } else {
         size = sizes[2];
@@ -38,59 +43,61 @@ export default {
       return size;
     }
   },
-  methods: {
-    renderImage: function (canvas) {
-      const ctx = canvas.getContext('2d');
-      const img  = new Image();
-      img.src = this.image;
-      img.addEventListener('load', () => {
-        ctx.imageSmoothingEnabled = true;
-        ctx.drawImage(img, 0, 0);
-      });
-    },
-    renderVanity: function(canvas) {
-      const ctx = canvas.getContext("2d");
-
-      ctx.fillStyle = '#555';
-      ctx.fillRect(0, canvas.height - (20 * 2), canvas.width, 40);
-
-      ctx.font = '14px Montserrat';
-      ctx.fillStyle = 'white';
-      ctx.fillText(`Make your own @ ${window.location.origin + window.location.pathname}`, 20, canvas.height - 15);
-    },
-    renderSpeech: async function(canvas, text) {
-      const context = canvas.getContext('2d');
-      context.beginPath();
-      context.globalAlpha = 0.2;
-      context.fillRect(canvas.width-320, 20, 300, canvas.height - 80);
-      context.globalAlpha = 1.0;
-
-      canvasTxt.font = 'TinyHand';
-      canvasTxt.fontSize = this.textSize;
-      canvasTxt.align = 'left';
-      canvasTxt.vAlign = 'top';
-      canvasTxt.lineHeight = 30;
-      await tinyHandFont.load();
-      canvasTxt.drawText(context, `${(text.length > 0) ? '"' +text.slice(0, 400) + '"' : ''}`, 290, 40, 250, 400);
-    },
-    renderAll: function() {
-      const {canvas} = this.$refs;
-      const ctx = canvas.getContext('2d');
-      const { width, height } = canvas;
-
-      ctx.clearRect(0, 0, width, height);
-      const color1 = '#3b5998';
-
-      ctx.fillStyle = color1;
-      ctx.fillRect(0, 0,  width, height);
-
-      this.renderImage(canvas);
-      this.renderVanity(canvas);
-      this.renderSpeech(canvas, this.speech);
-    }
-  },
-  mounted() {
-    this.renderAll();
-  }
 }
 </script>
+
+<style lang="scss" scoped>
+$color1: #3b5998;
+$color2: lighten($color1, 5%);
+
+.canvas{
+  width: 584px;
+  height: 500px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 240px 300px;
+  column-gap: 1rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    $color1 0px,
+    $color1 30px,
+    $color2 30px,
+    $color2 60px,
+  );
+}
+img{
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+.quote-container {
+  grid-column-start: 2;
+  position: relative;
+}
+blockquote{
+  min-height: 250px;
+  border-radius: 10px;
+  height: auto;
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  box-sizing: border-box;
+  padding: 20px;
+  font-family: 'TinyHand';
+  line-height: 2.5;
+  max-height: 460px;
+  position: relative;
+}
+.arrow{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-right-color: rgba(255, 255, 255, 0.3);
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -50px;
+  margin-left: -50px;
+}
+</style>
