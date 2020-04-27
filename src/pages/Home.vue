@@ -59,8 +59,11 @@ export default {
     };
   },
   computed: {
+    rawTextWithEmoji: function() {
+      return this.trumpize(this.rawText);
+    },
     trumpQuote: function() {
-      return this.addHands ? this.trumpize(this.rawText) : this.rawText;
+      return (this.addHands === true) ? this.rawTextWithEmoji : this.rawText;
     },
     image: function() {
       return this.trumps[this.trumpIndex].image;
