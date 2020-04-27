@@ -36,6 +36,8 @@ import Heading from '../components/Heading';
 
 import yelling from '@/assets/img/trumps/yelling.png';
 import smug from '@/assets/img/trumps/smug.png';
+import escapingHair from '@/assets/img/trumps/escaping_hair.png';
+import bald from '@/assets/img/trumps/bald.png';
 
 export default {
   name: 'Home',
@@ -57,6 +59,14 @@ export default {
           name: 'Smug Trump',
           image: smug,
         },
+        {
+          name: 'Bald Trump',
+          image: bald,
+        },
+        {
+          name: 'Escaping Hair',
+          image: escapingHair,
+        }
       ],
       trumpIndex: 0,
     };
@@ -76,7 +86,7 @@ export default {
     trumpize: function(text) {
       const emojiis = ['☝', '👌', '🖐', '👋', '🤏', '👐', '👋'];
       return text.split(' ')
-        .map((word) => word + (Math.random() >= 0.2 ? emojiis[Math.floor(Math.random() * emojiis.length)] : ''))
+        .map((word) => word + (Math.random() >= 0.5 ? emojiis[Math.floor(Math.random() * emojiis.length)] : ''))
         .join(' ');
     },
     setTrump: function(trumpIndex) {
