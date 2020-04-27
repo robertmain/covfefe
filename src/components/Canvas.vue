@@ -7,7 +7,7 @@
           {{speech.slice(0, 280)}}
         <span v-if="speech.length > 0">&quot;</span>
       </blockquote>
-      <div class="arrow"></div>
+      <div class="arrow" :style="{ top: `${bubblePosition}px` }"></div>
     </div>
   </div>
 </template>
@@ -23,6 +23,11 @@ export default {
       type: String,
       required: false,
       default: '',
+    },
+    bubblePosition: {
+      type: Number,
+      required: false,
+      default: 100,
     }
   },
   computed: {
@@ -90,7 +95,6 @@ blockquote{
 .arrow{
   position: absolute;
   left: 0;
-  top: 50%;
   width: 0;
   height: 0;
   border: 50px solid transparent;

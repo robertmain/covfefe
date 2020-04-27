@@ -1,6 +1,12 @@
 <template>
   <div class="grid">
-    <cvs ref="canvas" :image="image" :speech="trumpQuote"></cvs>
+    <cvs
+      ref="canvas"
+      :image="image"
+      :speech="trumpQuote"
+      :bubblePosition="trumps[trumpIndex].pointerPosition"
+    ></cvs>
+
     <div class="sidebar">
       <Heading level="3">Choose Your Trump</Heading><br />
 
@@ -23,7 +29,7 @@
 
       <span class="option">
         <label for="enableHands">Do The Hands Thing</label>
-        <input type="checkbox" id="enableHands" @change="rerenderCanvas" v-model="addHands" />
+        <input type="checkbox" id="enableHands" v-model="addHands" />
       </span>
     </div>
   </div>
@@ -54,18 +60,22 @@ export default {
         {
           name: 'Yelling Trump',
           image: yelling,
+          pointerPosition: 220,
         },
         {
           name: 'Smug Trump',
           image: smug,
+          pointerPosition: 220,
         },
         {
           name: 'Bald Trump',
           image: bald,
+          pointerPosition: 160,
         },
         {
           name: 'Escaping Hair',
           image: escapingHair,
+          pointerPosition: 230,
         }
       ],
       trumpIndex: 0,
