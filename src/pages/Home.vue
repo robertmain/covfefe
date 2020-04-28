@@ -24,13 +24,16 @@
       <Heading level="3">Type Your Text Below</Heading><br />
       <textarea
         placeholder="Many people say..."
-        v-model="rawText" cols="30" rows="10"
+        v-model="rawText" cols="30" rows="7"
+        maxlength="280"
       ></textarea>
-
-      <span class="option">
-        <label for="enableHands">Do The Hands Thing</label>
+      <div class="textbox-caption">
+        <label for="enableHands">Emojiis</label>
         <input type="checkbox" id="enableHands" v-model="addHands" />
-      </span>
+        <span class="remaining">
+          Remaining: {{280 - rawText.length}}
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -138,6 +141,7 @@ div.sidebar{
     padding: 10px;
     resize: none;
     box-sizing: border-box;
+    margin-bottom: -2px;
   }
 }
 .option{
@@ -145,5 +149,14 @@ div.sidebar{
   background-color: #AAA;
   padding: 5px;
   border: 1px solid #999;
+}
+.textbox-caption{
+  overflow: hidden;
+  padding: 10px;
+  background-color: #AAA;
+  .remaining{
+    text-align: right;
+    float: right;
+  }
 }
 </style>
