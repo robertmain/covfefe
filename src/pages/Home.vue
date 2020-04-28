@@ -102,6 +102,12 @@ export default {
     setTrump: function(trumpIndex) {
       this.trumpIndex = trumpIndex;
     },
+  },
+  mounted() {
+    const params = new URLSearchParams(window.location.search);
+    this.rawText = params.get('q') || '';
+    this.trumpIndex = parseInt(params.get('t')) -1 || 0;
+    this.addHands = ((params.get('h') === 'true') ? true : false) || true
   }
 }
 </script>
