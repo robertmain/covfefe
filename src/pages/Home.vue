@@ -36,7 +36,7 @@
       </div>
 
       <div class="share">
-        <button class="prefix">Share</button><input ref="urlBox" type="text" disabled :value="shareUrl" />
+        <button class="prefix" @click="copy">Copy URL</button><input ref="urlBox" type="text" disabled :value="shareUrl" />
       </div>
     </div>
   </div>
@@ -113,6 +113,13 @@ export default {
     setTrump: function(trumpIndex) {
       this.trumpIndex = trumpIndex;
     },
+    copy: function() {
+      this.$refs.urlBox.removeAttribute('disabled');
+      this.$refs.urlBox.focus();
+      this.$refs.urlBox.select();
+      document.execCommand('copy');
+      this.$refs.urlBox.setAttribute('disabled', true);
+    },
   },
   mounted() {
     const params = new URLSearchParams(window.location.search);
@@ -166,7 +173,7 @@ div.sidebar{
   margin-top: 20px;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 60px auto;
+  grid-template-columns: 80px auto;
   .prefix{
     grid-column-start: 1;
     grid-column-end: 2;
