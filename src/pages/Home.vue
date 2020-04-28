@@ -99,7 +99,8 @@ export default {
       return this.trumps[this.trumpIndex].image;
     },
     shareUrl: function() {
-      return `${window.location.href}?t=${this.trumpIndex + 1}h=${this.addHands}&q=${encodeURIComponent(this.rawText)}`;
+      const base = window.location.origin + window.location.pathname;
+      return `${base}?t=${this.trumpIndex + 1}h=${this.addHands}&q=${encodeURIComponent(this.rawText)}`;
     }
   },
   methods: {
