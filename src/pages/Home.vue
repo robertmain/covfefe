@@ -34,6 +34,10 @@
           Remaining: {{280 - rawText.length}}
         </span>
       </div>
+
+      <div class="share">
+        <span class="prefix"></span><input type="text" disabled :value="shareUrl" />
+      </div>
     </div>
   </div>
 </template>
@@ -93,6 +97,9 @@ export default {
     },
     image: function() {
       return this.trumps[this.trumpIndex].image;
+    },
+    shareUrl: function() {
+      return `${window.location.origin}?t=${this.trumpIndex + 1}h=${this.addHands}&q=${encodeURIComponent(this.rawText)}`;
     }
   },
   methods: {
@@ -144,12 +151,6 @@ div.sidebar{
     margin-bottom: -2px;
   }
 }
-.option{
-  display: inline-block;
-  background-color: #AAA;
-  padding: 5px;
-  border: 1px solid #999;
-}
 .textbox-caption{
   overflow: hidden;
   padding: 10px;
@@ -158,5 +159,16 @@ div.sidebar{
     text-align: right;
     float: right;
   }
+}
+.share{
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+input[type="text"] {
+  padding: 5px;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
 }
 </style>

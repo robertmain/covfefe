@@ -85,6 +85,7 @@ blockquote{
   height: auto;
   background: rgba(255, 255, 255, 0.3);
   color: white;
+  overflow: hidden;
   box-sizing: border-box;
   padding: 20px;
   font-family: 'TinyHand';
