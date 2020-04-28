@@ -36,7 +36,7 @@
       </div>
 
       <div class="share">
-        <span class="prefix"></span><input type="text" disabled :value="shareUrl" />
+        <button class="prefix">Share</button><input ref="urlBox" type="text" disabled :value="shareUrl" />
       </div>
     </div>
   </div>
@@ -144,6 +144,7 @@ div.sidebar{
   textarea{
     line-height: 1.5;
     font-family: 'Montserrat';
+    color: #2c3e50;
     width: 100%;
     padding: 10px;
     resize: none;
@@ -163,12 +164,28 @@ div.sidebar{
 .share{
   margin-top: 20px;
   overflow: hidden;
-}
-
-input[type="text"] {
-  padding: 5px;
-  width: 100%;
-  display: block;
-  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 60px auto;
+  .prefix{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    font-family: 'Montserrat';
+    background-color: #999;
+    color: #2c3e50;
+    text-align: right;
+    padding: 10px 5px;
+    border: 1px solid rgb(169, 169, 169);
+    cursor: pointer;
+    &:hover{
+      background-color: #555;
+    }
+  }
+  input[type="text"] {
+    grid-column-start: 2;
+    padding: 5px;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
 }
 </style>
