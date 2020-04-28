@@ -61,7 +61,7 @@ $color2: lighten($color1, 5%);
   padding: 20px;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 240px 300px;
+  grid-template-columns: 220px 300px;
   column-gap: 1rem;
   background: repeating-linear-gradient(
     -45deg,
