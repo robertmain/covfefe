@@ -24,7 +24,7 @@
       <Heading level="3">Type Your Text Below</Heading><br />
       <textarea
         placeholder="Many people say..."
-        v-model="rawText" cols="30" rows="7"
+        v-model="rawText" cols="30" rows="6"
         maxlength="280"
       ></textarea>
       <div class="textbox-caption">
