@@ -23,17 +23,18 @@ export default {
 <style lang="scss" scoped>
 h1{
   font-size: 45px;
-  font-family: 'TinyHand';
+  color: var(--mid-grey-3)
 }
+
 h2{
-  margin-top: 20px;
-  color: #555;
+  margin-top: var(--spacing-md);
+  color: var(--mid-grey-2);
 }
 img{
   width: 75px;
   margin: 0px;
   float: left;
-  margin-right: -40px;
+  margin-right: calc(-1 * var(--spacing-lg));
   &:last-of-type{
     margin-right: initial;
   }

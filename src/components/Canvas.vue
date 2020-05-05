@@ -58,7 +58,7 @@ $color2: lighten($color1, 5%);
 .canvas{
   width: 584px;
   height: 500px;
-  padding: 20px;
+  padding: var(--spacing-md);
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 220px 300px;
@@ -83,11 +83,11 @@ blockquote{
   min-height: 250px;
   border-radius: 10px;
   height: auto;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(white, 0.3);
   color: white;
   overflow: hidden;
   box-sizing: border-box;
-  padding: 20px;
+  padding: var(--spacing-md);
   font-family: 'TinyHand';
   line-height: 2.5;
   max-height: 460px;

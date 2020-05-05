@@ -31,11 +31,11 @@ export default {
 div{
   background-color: white;
   overflow: hidden;
-  padding: 5px;
-  border: 1px solid #CCC;
+  padding: var(--spacing-xs);
+  border: 1px solid var(--light-grey-3);
   text-align: center;
   &.selected, &:hover{
-    background-color: #EEE;
+    background-color: var(--light-grey-1);
     cursor: pointer;
   }
 }

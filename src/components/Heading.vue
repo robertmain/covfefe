@@ -26,8 +26,8 @@ h1, h2, h3, h4, h5, h6{
   clear: both;
   display: block;
   float: none;
-  margin-bottom: 10px;
-  margin-top: 20px;
+  margin-bottom: var(--spacing-sm);
+  margin-top: var(--spacing-md);
   &:first-of-type {
     margin-top: 0px;
   }

@@ -144,17 +144,18 @@ div.grid{
 }
 
 div.sidebar{
-  background-color: #EEE;
+  background-color: var(--light-grey-1);
   grid-column-start: 2;
   overflow: hidden;
-  padding: 20px;
+  padding: var(--spacing-md);
   box-sizing: border-box;
   textarea{
     line-height: 1.5;
     font-family: 'Montserrat';
-    color: #2c3e50;
+    color: var(--mid-grey-2);
+    border: 1px solid var(--light-grey-3);
     width: 100%;
-    padding: 10px;
+    padding: var(--spacing-sm);
     resize: none;
     box-sizing: border-box;
     margin-bottom: -2px;
@@ -162,15 +163,15 @@ div.sidebar{
 }
 .textbox-caption{
   overflow: hidden;
-  padding: 10px;
-  background-color: #AAA;
+  padding: var(--spacing-sm);
+  background-color: var(--light-grey-4);
   .remaining{
     text-align: right;
     float: right;
   }
 }
 .share{
-  margin-top: 20px;
+  margin-top: var(--spacing-md);
   overflow: hidden;
   display: grid;
   grid-template-columns: 80px auto;
@@ -178,22 +179,24 @@ div.sidebar{
     grid-column-start: 1;
     grid-column-end: 2;
     font-family: 'Montserrat';
-    background-color: #999;
-    color: #2c3e50;
+    background-color: var(--light-grey-4);
+    color: var(--mid-grey-2);
     text-align: right;
-    padding: 10px 5px;
-    border: 1px solid rgb(169, 169, 169);
+    padding: var(--spacing-sm) var(--spacing-xs);
+    border: 1px solid var(--light-grey-3);
     cursor: pointer;
     &:hover{
-      background-color: #555;
+      background-color: var(--light-grey-4);
+      color: white;
     }
   }
   input[type="text"] {
     grid-column-start: 2;
-    padding: 5px;
+    padding: var(--spacing-sm);
     width: 100%;
     display: block;
     box-sizing: border-box;
+    border: 1px solid var(--light-grey-3);
   }
 }
 </style>
