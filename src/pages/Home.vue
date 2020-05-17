@@ -100,7 +100,11 @@ export default {
     },
     shareUrl: function() {
       const base = window.location.origin + window.location.pathname;
-      return `${base}?t=${this.trumpIndex + 1}h=${this.addHands}&q=${encodeURIComponent(this.rawText)}`;
+      return base + '?' + Object.entries({
+        t: (this.trumpIndex + 1),
+        h: this.addHands,
+        q: encodeURIComponent(this.rawText),
+      }).map(([key, value]) => `${key}=${value}`).join('&');
     }
   },
   methods: {
