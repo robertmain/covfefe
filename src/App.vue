@@ -4,7 +4,7 @@
       <AppTitle />
     </header>
     <main>
-      <Home />
+      <router-view></router-view>
     </main>
 
     <footer>
@@ -18,13 +18,11 @@
 <script>
 import 'reset.css';
 import AppTitle from './components/AppTitle';
-import Home from './pages/Home.vue';
 
 export default {
   name: 'App',
   components: {
     AppTitle,
-    Home,
   }
 }
 </script>
