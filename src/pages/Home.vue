@@ -22,18 +22,16 @@
       </div>
 
       <Heading level="3">Type Your Text Below</Heading><br />
-      <textarea
-        placeholder="Many people say..."
-        v-model="rawText" cols="30" rows="6"
-        maxlength="280"
-      ></textarea>
-      <div class="textbox-caption">
-        <label for="enableHands">Emojiis</label>
-        <input type="checkbox" id="enableHands" v-model="addHands" />
-        <span class="remaining">
-          Remaining: {{280 - rawText.length}}
-        </span>
-      </div>
+      <TextBox
+        :limit="280"
+        placeholder="Many people say...."
+        v-model="rawText"
+      >
+        <template v-slot:left>
+          <label for="enableHands">Emojiis</label>
+          <input type="checkbox" id="enableHands" v-model="addHands" />
+        </template>
+      </TextBox>
 
       <div class="share">
         <button class="prefix" @click="copy">Copy URL</button><input ref="urlBox" type="text" disabled :value="shareUrl" />
@@ -46,6 +44,7 @@
 import Canvas from '../components/Canvas';
 import ImageTile from '../components/ImageTile';
 import Heading from '../components/Heading';
+import TextBox from '../components/TextBox';
 
 import yelling from '@/assets/img/trumps/yelling.png';
 import smug from '@/assets/img/trumps/smug.png';
@@ -58,6 +57,7 @@ export default {
     cvs: Canvas,
     Heading,
     ImageTile,
+    TextBox,
   },
   data() {
     return {
@@ -126,10 +126,17 @@ export default {
     },
   },
   mounted() {
-    const params = new URLSearchParams(window.location.search);
-    this.rawText = params.get('q') || '';
-    this.trumpIndex = parseInt(params.get('t')) -1 || 0;
-    this.addHands = ((params.get('h') === 'true') ? true : false) || true
+    const {
+      h: addHands,
+      t: trump,
+      q: quote,
+    } = this.$route.query;
+    this.addHands = {
+      'true': true,
+      'false': false,
+    }[addHands] || false;
+    this.trumpIndex = parseInt((trump -1) || 0);
+    this.rawText = quote || '';
   }
 }
 </script>
@@ -153,26 +160,6 @@ div.sidebar{
   overflow: hidden;
   padding: var(--spacing-md);
   box-sizing: border-box;
-  textarea{
-    line-height: 1.5;
-    font-family: 'Montserrat';
-    color: var(--mid-grey-2);
-    border: 1px solid var(--light-grey-3);
-    width: 100%;
-    padding: var(--spacing-sm);
-    resize: none;
-    box-sizing: border-box;
-    margin-bottom: -2px;
-  }
-}
-.textbox-caption{
-  overflow: hidden;
-  padding: var(--spacing-sm);
-  background-color: var(--light-grey-4);
-  .remaining{
-    text-align: right;
-    float: right;
-  }
 }
 .share{
   margin-top: var(--spacing-md);
