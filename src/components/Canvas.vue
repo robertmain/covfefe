@@ -56,7 +56,7 @@ $color1: #3b5998;
 $color2: lighten($color1, 5%);
 
 .canvas{
-  width: 584px;
+  width: 100%;
   height: 500px;
   padding: var(--spacing-md);
   box-sizing: border-box;

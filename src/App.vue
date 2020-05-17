@@ -67,10 +67,17 @@ body {
   background-attachment: fixed;
   font-family: 'Montserrat';
   font-size: 14px;
+  display: grid;
 }
 #app {
-  width: 1024px;
-  margin: var(--spacing-lg) auto;
+  padding: 0px var(--spacing-md);
+  @media (min-width: 768px) {
+    margin: var(--spacing-lg) auto;
+    width: 768px;
+  }
+  @media (min-width: 992px) {
+    width: 992px;
+  }
   color: var(--mid-grey-2);
 }
 h1,h2,h3,h4 {

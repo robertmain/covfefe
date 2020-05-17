@@ -144,7 +144,11 @@ export default {
 <style lang="scss" scoped>
 div.grid{
   display: grid;
-  grid-template-columns: auto 400px;
+  grid-template-columns: auto;
+  @media (min-width: 768px) {
+  }
+  @media (min-width: 992px) {
+  }
 }
 
 .trump-container{
@@ -156,7 +160,13 @@ div.grid{
 
 div.sidebar{
   background-color: var(--light-grey-1);
-  grid-column-start: 2;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  @media (min-width: 992px) {
+    grid-column-start: 2;
+    grid-row-start: 1;
+  }
   overflow: hidden;
   padding: var(--spacing-md);
   box-sizing: border-box;
