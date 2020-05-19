@@ -67,17 +67,17 @@ export default {
         {
           name: 'Yelling Trump',
           image: yelling,
-          pointerPosition: 200,
+          pointerPosition: 240,
         },
         {
           name: 'Smug Trump',
           image: smug,
-          pointerPosition: 170,
+          pointerPosition: 200,
         },
         {
           name: 'Bald Trump',
           image: bald,
-          pointerPosition: 160,
+          pointerPosition: 190,
         },
         {
           name: 'Comb-over Trump',
