@@ -69,7 +69,6 @@ textarea{
   padding: var(--spacing-sm);
   margin-bottom: -2px;
   font-family: 'Montserrat';
-  box-sizing: border-box;
 }
 .caption {
   background-color: var(--light-grey-3);

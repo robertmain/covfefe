@@ -30,6 +30,8 @@ export default {
 @import './assets/fonts/tinyhand/style.css';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+*{ box-sizing: border-box; }
+
 :root{
   // Spacing
   --spacing-xs: 5px;

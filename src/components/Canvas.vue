@@ -59,7 +59,6 @@ $color2: lighten($color1, 5%);
   width: 100%;
   height: 500px;
   padding: var(--spacing-md);
-  box-sizing: border-box;
   display: grid;
   grid-template-columns: 220px 300px;
   column-gap: 1rem;
@@ -86,7 +85,6 @@ blockquote{
   background: rgba(white, 0.3);
   color: white;
   overflow: hidden;
-  box-sizing: border-box;
   padding: var(--spacing-md);
   font-family: 'TinyHand';
   line-height: 2.5;

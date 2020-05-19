@@ -169,7 +169,6 @@ div.sidebar{
   }
   overflow: hidden;
   padding: var(--spacing-md);
-  box-sizing: border-box;
 }
 .share{
   margin-top: var(--spacing-md);
@@ -196,7 +195,6 @@ div.sidebar{
     padding: var(--spacing-sm);
     width: 100%;
     display: block;
-    box-sizing: border-box;
     border: 1px solid var(--light-grey-3);
   }
 }
