@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import 'reset.css';
+// import 'reset.css';
 import AppTitle from './components/AppTitle';
 
 export default {
@@ -27,6 +27,7 @@ export default {
 }
 </script>
 <style lang="scss">
+@import '~reset.css';
 @import './assets/fonts/tinyhand/style.css';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 

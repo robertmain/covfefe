@@ -1,6 +1,6 @@
 <template>
   <div :class="{selected: isSelected}">
-    <img :src="image" alt=""><br />
+    <img :src="image" alt="">
     <span>{{this.name}}</span>
   </div>
 </template>
@@ -30,22 +30,34 @@ export default {
 <style lang="scss" scoped>
 div{
   background-color: white;
-  overflow: hidden;
   padding: var(--spacing-xs);
   border: 1px solid var(--light-grey-3);
-  text-align: center;
+  display: grid;
+  grid-template-areas:
+    "image"
+    "text";
+  grid-template-rows: 50px auto;
+  grid-template-columns: 100%;
+  justify-content: center;
+  justify-items: center;
+  row-gap: var(--spacing-sm);
   &.selected, &:hover{
     background-color: var(--light-grey-1);
     cursor: pointer;
   }
 }
 img{
-  max-height: 75px;
+  grid-area: image;
+  object-fit: cover;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 span{
+  grid-area: text;
+  text-align: center;
   font-size: 12px;
-  clear: both;
-  float: none;
+  word-break: break-word;
+  align-content: center;
 }
 </style>
