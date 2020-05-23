@@ -74,8 +74,8 @@ body {
 }
 #app {
   padding: 0px var(--spacing-md);
+  margin: var(--spacing-md) auto;
   @media (min-width: 768px) {
-    margin: var(--spacing-lg) auto;
     width: 768px;
   }
   @media (min-width: 992px) {
