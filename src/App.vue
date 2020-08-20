@@ -29,6 +29,7 @@ export default {
 <style lang="scss">
 @import '~reset.css';
 @import './assets/fonts/tinyhand/style.css';
+@import './assets/styles/mixins/respond-to';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 *{ box-sizing: border-box; }
@@ -75,12 +76,12 @@ body {
 #app {
   padding: 0px var(--spacing-md);
   margin: var(--spacing-md) auto;
-  @media (min-width: 768px) {
-    width: 768px;
-  }
-  @media (min-width: 992px) {
-    width: 992px;
-  }
+  width: 100%;
+  // @include respond-to('xs'){ width: map-get($breakpoints, 'xs'); }
+  @include respond-to('sm'){ width: map-get($breakpoints, 'sm'); }
+  @include respond-to('md'){ width: map-get($breakpoints, 'md'); }
+  @include respond-to('lg'){ width: map-get($breakpoints, 'lg'); }
+  @include respond-to('xl'){ width: map-get($breakpoints, 'xl'); }
   color: var(--mid-grey-2);
 }
 h1,h2,h3,h4 {

@@ -56,8 +56,6 @@ $color1: #3b5998;
 $color2: lighten($color1, 5%);
 
 .canvas{
-  width: 100%;
-  height: 500px;
   padding: var(--spacing-md);
   display: grid;
   grid-template-columns: 220px 300px;

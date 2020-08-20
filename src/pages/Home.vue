@@ -45,6 +45,14 @@ import Canvas from '../components/Canvas';
 import ImageTile from '../components/ImageTile';
 import Heading from '../components/Heading';
 import TextBox from '../components/TextBox';
+import {
+  okHand,
+  openHands,
+  pinchingHand,
+  wavingHand,
+  raisedHandwithFingersSplayed,
+  pointUp,
+} from '../components/Emoji';
 
 import yelling from '@/assets/img/trumps/yelling.png';
 import smug from '@/assets/img/trumps/smug.png';
@@ -109,7 +117,14 @@ export default {
   },
   methods: {
     trumpize: function(text) {
-      const emojiis = ['☝', '👌', '🖐', '👋', '🤏', '👐', '👋'];
+      const emojiis = [
+        pointUp,
+        okHand,
+        raisedHandwithFingersSplayed,
+        pinchingHand,
+        openHands,
+        wavingHand,
+      ];
       return text.split(' ')
         .map((word) => word + (Math.random() >= 0.5 ? emojiis[Math.floor(Math.random() * emojiis.length)] : ''))
         .join(' ');
@@ -142,31 +157,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/styles/mixins/respond-to';
+
 div.grid{
   display: grid;
-  grid-template-columns: auto;
-  @media (min-width: 768px) {
-  }
-  @media (min-width: 992px) {
+  grid-template-areas:
+    "sidebar"
+    "canvas";
+  grid-template-columns: auto-fit;
+  grid-template-rows: 1fr 1fr;
+
+  @include respond-to('lg'){
+    grid-template-areas: "canvas sidebar";
+    grid-template-columns: auto auto;
+    grid-template-rows: 1fr;
   }
 }
 
 .trump-container{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(1, 1fr);
+  @include respond-to('sm'){ grid-template-columns: repeat(2, 1fr) }
+  @include respond-to('lg'){ grid-template-columns: repeat(4, 1fr) }
   column-gap: 0.5rem;
   row-gap: 0.5rem;
 }
 
-div.sidebar{
+.canvas{
+  grid-area: canvas;
+}
+.sidebar{
+  grid-area: sidebar;
   background-color: var(--light-grey-1);
-  grid-column-start: 1;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  @media (min-width: 992px) {
-    grid-column-start: 2;
-    grid-row-start: 1;
-  }
   overflow: hidden;
   padding: var(--spacing-md);
 }

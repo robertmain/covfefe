@@ -21,17 +21,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/styles/mixins/respond-to';
+div{
+  display: grid;
+  grid-template-areas: "faces title"
+  " subtitle";
+}
+
 h1{
-  font-size: 45px;
-  color: var(--mid-grey-3)
+  font-size: 30px;
+  color: var(--mid-grey-3);
+  @include respond-to('xs'){
+    background-color: red;
+  };
 }
 
 h2{
+  font-size: 12px;
   margin-top: var(--spacing-md);
   color: var(--mid-grey-2);
 }
 img{
-  width: 75px;
+  width: 60px;
   margin: 0px;
   float: left;
   margin-right: calc(-1 * var(--spacing-lg));
