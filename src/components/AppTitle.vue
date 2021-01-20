@@ -3,7 +3,7 @@
     <img src="@/assets/img/trumps/smug.png" alt="">
     <img src="@/assets/img/trumps/yelling.png" alt="">
     <h1>{{ this.text }}</h1>
-    <h2>&quot;still yore prezidnt&quot;</h2>
+    <h2>&quot;no longer yore prezidnt&quot;</h2>
   </div>
 </template>
 
