@@ -2,60 +2,55 @@
   <div class="canvas">
     <img :src="image" />
     <div class="quote-container">
-      <blockquote :style="{fontSize: `${textSize}px`}">
-        <span v-if="speech.length > 0">&quot;</span>
-          {{speech.slice(0, 280)}}
-        <span v-if="speech.length > 0">&quot;</span>
+      <blockquote :style="{ fontSize: `${textSize}px` }">
+        <span v-if="props.speech.length > 0">&quot;</span>
+        {{ props.speech.slice(0, 280) }}
+        <span v-if="props.speech.length > 0">&quot;</span>
       </blockquote>
       <div class="arrow" :style="{ top: `${bubblePosition}px` }"></div>
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: 'Canvas',
-  props: {
-    image: {
-      type: String,
-      required: true,
-    },
-    speech: {
-      type: String,
-      required: false,
-      default: '',
-    },
-    bubblePosition: {
-      type: Number,
-      required: false,
-      default: 100,
-    }
+
+<script setup lang="ts">
+import { computed, defineProps } from 'vue'
+
+// Props
+const props = defineProps({
+  image: {
+    type: String,
+    required: true,
   },
-  computed: {
-    textSize: function() {
-      const sizes = [
-        20,
-        16,
-        12,
-      ];
-      let size;
-      if(this.speech.length < 116) {
-        [size] = sizes
-      } else if (this.speech.length > 116 && this.speech.length < 246) {
-        size = sizes[1];
-      } else {
-        size = sizes[2];
-      }
-      return size;
-    }
+  speech: {
+    type: String,
+    required: false,
+    default: '',
   },
-}
+  bubblePosition: {
+    type: Number,
+    required: false,
+    default: 100,
+  },
+})
+
+// Computed property for dynamic text size
+const textSize = computed(() => {
+  const sizes = [20, 16, 12]
+  if (props.speech.length < 116) {
+    return sizes[0]
+  } else if (props.speech.length > 116 && props.speech.length < 246) {
+    return sizes[1]
+  } else {
+    return sizes[2]
+  }
+})
 </script>
 
 <style lang="scss" scoped>
 $color1: #3b5998;
 $color2: lighten($color1, 5%);
 
-.canvas{
+.canvas {
   width: 100%;
   height: 500px;
   padding: var(--spacing-md);
@@ -68,18 +63,21 @@ $color2: lighten($color1, 5%);
     $color1 0px,
     $color1 30px,
     $color2 30px,
-    $color2 60px,
+    $color2 60px
   );
 }
-img{
+
+img {
   grid-column-start: 1;
   grid-column-end: 2;
 }
+
 .quote-container {
   grid-column-start: 2;
   position: relative;
 }
-blockquote{
+
+blockquote {
   min-height: 250px;
   border-radius: 10px;
   height: auto;
@@ -93,7 +91,8 @@ blockquote{
   max-height: 460px;
   position: relative;
 }
-.arrow{
+
+.arrow {
   position: absolute;
   left: 0;
   width: 0;

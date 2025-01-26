@@ -1,36 +1,29 @@
 <template>
-  <div id="app">
-    <header>
-      <AppTitle />
-    </header>
-    <main>
-      <router-view></router-view>
-    </main>
+  <AppTitle />
+  <main>
+    <router-view></router-view>
+  </main>
 
-    <footer>
-      <p>
-        Art by <a href="http://theoatmeal.com">Matthew Inman</a>. TinyHand heading font by <a href="https://www.buzzfeednews.com/article/benking/tiny-hand-will-be-your-new-comic-sans#.ej9Mp8OlY">Mark Davis</a>
-      </p>
-    </footer>
-  </div>
+  <footer>
+    <p>
+      Art by <a href="http://theoatmeal.com">Matthew Inman</a>. TinyHand heading font by
+      <a
+        href="https://www.buzzfeednews.com/article/benking/tiny-hand-will-be-your-new-comic-sans#.ej9Mp8OlY"
+        >Mark Davis</a
+      >
+    </p>
+  </footer>
 </template>
 
-<script>
-import 'reset.css';
-import AppTitle from './components/AppTitle';
-
-export default {
-  name: 'App',
-  components: {
-    AppTitle,
-  }
-}
+<script setup lang="ts">
+import 'reset.css'
+import AppTitle from '@/components/AppTitle.vue'
 </script>
 <style lang="scss">
 @import './assets/fonts/tinyhand/style.css';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-:root{
+:root {
   // Spacing
   --spacing-xs: 5px;
   --spacing-sm: 10px;
@@ -42,10 +35,10 @@ export default {
   --mid-yellow: yellow;
 
   //Greys
-  --light-grey-1: #EEE;
-  --light-grey-2: #DDD;
-  --light-grey-3: #CCC;
-  --light-grey-4: #A9A9A9;
+  --light-grey-1: #eee;
+  --light-grey-2: #ddd;
+  --light-grey-3: #ccc;
+  --light-grey-4: #a9a9a9;
 
   --mid-grey-1: #777;
   --mid-grey-2: #575757;
@@ -71,26 +64,28 @@ body {
 }
 #app {
   padding: 0px var(--spacing-md);
+  color: var(--mid-grey-2);
+  display: grid;
+  grid-template-columns: auto;
   @media (min-width: 768px) {
-    margin: var(--spacing-lg) auto;
+    margin: var(--spacing-sm) auto;
     width: 768px;
   }
   @media (min-width: 992px) {
     width: 992px;
   }
-  color: var(--mid-grey-2);
 }
-h1,h2,h3,h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: 'TinyHand';
 }
-header{
-  margin-bottom: var(--spacing-lg);
-}
-main{
+main {
   background-color: white;
   padding: var(--spacing-md);
 }
-footer{
+footer {
   padding: var(--spacing-md);
   background-color: var(--light-grey-1);
   p {
@@ -100,14 +95,14 @@ footer{
     color: var(--mid-orange);
   }
 }
-p{
+p {
   color: var(--mid-grey-1);
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
 }
-a{
+a {
   text-decoration: none;
-  &:hover{
+  &:hover {
     text-decoration: underline;
   }
 }

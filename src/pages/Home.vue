@@ -8,7 +8,7 @@
     ></cvs>
 
     <div class="sidebar">
-      <Heading level="3">Choose Your Trump</Heading><br />
+      <Heading :level="3">Choose Your Trump</Heading><br />
 
       <div class="trump-container">
         <ImageTile
@@ -17,16 +17,13 @@
           @click.native="setTrump(index)"
           :key="trump.image"
           :name="trump.name"
-          :image="trump.image">
+          :image="trump.image"
+        >
         </ImageTile>
       </div>
 
-      <Heading level="3">Type Your Text Below</Heading><br />
-      <TextBox
-        :limit="280"
-        placeholder="Many people say...."
-        v-model="rawText"
-      >
+      <Heading :level="3">Type Your Text Below</Heading><br />
+      <TextBox :limit="280" placeholder="Many people say...." v-model="rawText">
         <template v-slot:left>
           <label for="enableHands">Emojiis</label>
           <input type="checkbox" id="enableHands" v-model="addHands" />
@@ -34,115 +31,101 @@
       </TextBox>
 
       <div class="share">
-        <button class="prefix" @click="copy">Copy URL</button><input ref="urlBox" type="text" disabled :value="shareUrl" />
+        <button class="prefix" @click="copy">Copy URL</button>
+        <input ref="urlBox" type="text" disabled :value="shareUrl" />
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import Canvas from '../components/Canvas';
-import ImageTile from '../components/ImageTile';
-import Heading from '../components/Heading';
-import TextBox from '../components/TextBox';
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue'
+import cvs from '../components/Canvas.vue'
+import ImageTile from '../components/ImageTile.vue'
+import Heading from '../components/Heading.vue'
+import TextBox from '../components/TextBox.vue'
 
-import yelling from '@/assets/img/trumps/yelling.png';
-import smug from '@/assets/img/trumps/smug.png';
-import escapingHair from '@/assets/img/trumps/escaping_hair.png';
-import bald from '@/assets/img/trumps/bald.png';
+import yelling from '@/assets/img/trumps/yelling.png'
+import smug from '@/assets/img/trumps/smug.png'
+import escapingHair from '@/assets/img/trumps/escaping_hair.png'
+import bald from '@/assets/img/trumps/bald.png'
 
-export default {
-  name: 'Home',
-  components: {
-    cvs: Canvas,
-    Heading,
-    ImageTile,
-    TextBox,
+// Reactive state
+const addHands = ref(true)
+const rawText = ref('')
+const trumpIndex = ref(0)
+
+const trumps = [
+  {
+    name: 'Yelling',
+    image: yelling,
+    pointerPosition: 200,
   },
-  data() {
-    return {
-      addHands: true,
-      rawText: '',
-      trumps: [
-        {
-          name: 'Yelling Trump',
-          image: yelling,
-          pointerPosition: 200,
-        },
-        {
-          name: 'Smug Trump',
-          image: smug,
-          pointerPosition: 170,
-        },
-        {
-          name: 'Bald Trump',
-          image: bald,
-          pointerPosition: 160,
-        },
-        {
-          name: 'Comb-over Trump',
-          image: escapingHair,
-          pointerPosition: 230,
-        }
-      ],
-      trumpIndex: 0,
-    };
+  {
+    name: 'Smug',
+    image: smug,
+    pointerPosition: 170,
   },
-  computed: {
-    rawTextWithEmoji: function() {
-      return this.trumpize(this.rawText);
-    },
-    trumpQuote: function() {
-      return (this.addHands === true) ? this.rawTextWithEmoji : this.rawText;
-    },
-    image: function() {
-      return this.trumps[this.trumpIndex].image;
-    },
-    shareUrl: function() {
-      const base = window.location.origin + window.location.pathname;
-      return base + '?' + Object.entries({
-        t: (this.trumpIndex + 1),
-        h: this.addHands,
-        q: encodeURIComponent(this.rawText),
-      }).map(([key, value]) => `${key}=${value}`).join('&');
-    }
+  {
+    name: 'Bald',
+    image: bald,
+    pointerPosition: 160,
   },
-  methods: {
-    trumpize: function(text) {
-      const emojiis = ['☝', '👌', '🖐', '👋', '🤏', '👐', '👋'];
-      return text.split(' ')
-        .map((word) => word + (Math.random() >= 0.5 ? emojiis[Math.floor(Math.random() * emojiis.length)] : ''))
-        .join(' ');
-    },
-    setTrump: function(trumpIndex) {
-      this.trumpIndex = trumpIndex;
-    },
-    copy: function() {
-      this.$refs.urlBox.removeAttribute('disabled');
-      this.$refs.urlBox.focus();
-      this.$refs.urlBox.select();
-      document.execCommand('copy');
-      this.$refs.urlBox.setAttribute('disabled', true);
-    },
+  {
+    name: 'Comb-over',
+    image: escapingHair,
+    pointerPosition: 230,
   },
-  mounted() {
-    const {
-      h: addHands,
-      t: trump,
-      q: quote,
-    } = this.$route.query;
-    this.addHands = {
-      'true': true,
-      'false': false,
-    }[addHands] || false;
-    this.trumpIndex = parseInt((trump -1) || 0);
-    this.rawText = quote || '';
-  }
+]
+
+// Computed properties
+const rawTextWithEmoji = computed(() =>
+  rawText.value
+    .split(' ')
+    .map(
+      (word) =>
+        word +
+        (Math.random() >= 0.5
+          ? ['☝', '👌', '🖐', '👋', '🤏', '👐'][Math.floor(Math.random() * 6)]
+          : ''),
+    )
+    .join(' '),
+)
+
+const trumpQuote = computed(() => (addHands.value ? rawTextWithEmoji.value : rawText.value))
+
+const image = computed(() => trumps[trumpIndex.value].image)
+
+const shareUrl = computed(() => {
+  const base = window.location.origin + window.location.pathname
+  const url = new URL(window.location.href)
+  const params = new URLSearchParams(url.search)
+  params.set('t', (trumpIndex.value + 1).toString())
+  params.set('h', addHands.value.toString())
+  params.set('q', encodeURIComponent(rawText.value))
+  url.search = params.toString()
+  return url.toString()
+})
+
+const setTrump = (index: number) => {
+  trumpIndex.value = index
 }
+
+const copy = async () => {
+  await navigator.clipboard.writeText(shareUrl.value)
+}
+
+// Lifecycle hook
+onMounted(() => {
+  const { h, t, q } = Object.fromEntries(new URLSearchParams(window.location.search))
+  addHands.value = h === 'true'
+  trumpIndex.value = parseInt(t) - 1 || 0
+  rawText.value = q || ''
+})
 </script>
 
 <style lang="scss" scoped>
-div.grid{
+div.grid {
   display: grid;
   grid-template-columns: auto;
   @media (min-width: 768px) {
@@ -151,32 +134,32 @@ div.grid{
   }
 }
 
-.trump-container{
+.trump-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 0.5rem;
   row-gap: 0.5rem;
 }
 
-div.sidebar{
+div.sidebar {
   background-color: var(--light-grey-1);
   grid-column-start: 1;
   grid-row-start: 1;
   grid-row-end: 2;
+  overflow: hidden;
+  padding: var(--spacing-md);
+  box-sizing: border-box;
   @media (min-width: 992px) {
     grid-column-start: 2;
     grid-row-start: 1;
   }
-  overflow: hidden;
-  padding: var(--spacing-md);
-  box-sizing: border-box;
 }
-.share{
+.share {
   margin-top: var(--spacing-md);
   overflow: hidden;
   display: grid;
   grid-template-columns: 80px auto;
-  .prefix{
+  .prefix {
     grid-column-start: 1;
     grid-column-end: 2;
     font-family: 'Montserrat';
@@ -186,12 +169,12 @@ div.sidebar{
     padding: var(--spacing-sm) var(--spacing-xs);
     border: 1px solid var(--light-grey-3);
     cursor: pointer;
-    &:hover{
+    &:hover {
       background-color: var(--light-grey-4);
       color: white;
     }
   }
-  input[type="text"] {
+  input[type='text'] {
     grid-column-start: 2;
     padding: var(--spacing-sm);
     width: 100%;

@@ -7,60 +7,52 @@
       :maxlength="limit"
       :placeholder="placeholder"
       ref="textbox"
-      @input="() => $emit('input', this.text)"
+      @input="onInput"
     ></textarea>
     <div class="caption">
-      <div class="left"><slot name="left"></slot></div>
-      <span class="text-remaining">Remaining: {{limit - text.length}}</span>
+      <div class="left">
+        <slot name="left"></slot>
+      </div>
+      <span class="text-remaining">Remaining: {{ limit - text.length }}</span>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'TextBox',
-  props: {
-    placeholder: {
-      type: String,
-      required: false,
-      default: '',
-    },
-    cols: {
-      type: Number,
-      required: false,
-      default: 30,
-    },
-    rows: {
-      type: Number,
-      required: false,
-      default: 6,
-    },
-    limit: {
-      type: Number,
-      required: false,
-      default: 40,
-    },
-    value: {
-      type: String,
-      required: false,
-      default: '',
-    },
-  },
-  data: () => ({
-    text: '',
-  }),
-  watch: {
-    value: function(newVal, oldVal) {
-      if(newVal !== oldVal) {
-        this.text = newVal;
-      }
-    },
-  },
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+
+interface Props {
+  placeholder?: string
+  cols?: number
+  rows?: number
+  limit?: number
+  value?: string
 }
+
+const { placeholder = '', cols = 30, rows = 6, limit = 40, value = '' } = defineProps<Props>()
+
+// Reactive data
+const text = ref('')
+
+// Emit input event
+const onInput = () => {
+  emit('update:modelValue', text.value)
+}
+const emit = defineEmits(['update:modelValue'])
+
+watch(
+  () => value,
+  (newVal) => {
+    if (newVal !== text.value) {
+      text.value = newVal
+    }
+  },
+  { immediate: true },
+)
 </script>
 
 <style lang="scss" scoped>
-textarea{
+textarea {
   resize: none;
   line-height: 1.5;
   color: var(--mid-grey-2);
@@ -76,11 +68,11 @@ textarea{
   padding: var(--spacing-sm);
   display: grid;
   grid-template-columns: 50% 50%;
-  .insert{
+  .left {
     grid-column-start: 1;
     grid-column-end: 2;
   }
-  .text-remaining{
+  .text-remaining {
     grid-column-start: 2;
     text-align: right;
   }

@@ -1,50 +1,41 @@
 <template>
-  <div :class="{selected: isSelected}">
-    <img :src="image" alt=""><br />
-    <span>{{this.name}}</span>
+  <div :class="{ selected: isSelected }">
+    <img :src="image" alt="" /><br />
+    <span>{{ name }}</span>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ImageTile',
-  props: {
-    image: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: false,
-      default: '',
-    },
-    isSelected: {
-      type: Boolean,
-      required: false,
-      default: false,
-    }
-  }
+<script setup lang="ts">
+interface ImageTileProps {
+  image: string
+  name?: string
+  isSelected?: boolean
 }
+const { name = '', isSelected = false } = defineProps<ImageTileProps>()
 </script>
 
 <style lang="scss" scoped>
-div{
+div {
   background-color: white;
   overflow: hidden;
   padding: var(--spacing-xs);
   border: 1px solid var(--light-grey-3);
   text-align: center;
-  &.selected, &:hover{
+
+  &.selected,
+  &:hover {
     background-color: var(--light-grey-1);
     cursor: pointer;
   }
 }
-img{
+
+img {
   max-height: 75px;
 }
 
-span{
-  font-size: 12px;
+span {
+  font-family: 'Tinyhand';
+  font-size: 10px;
   clear: both;
   float: none;
 }
