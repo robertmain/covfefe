@@ -2,9 +2,9 @@
   <div class="grid">
     <cvs
       ref="canvas"
-      :image="image"
+      :image="currentTrump.image"
       :speech="trumpQuote"
-      :bubblePosition="trumps[trumpIndex].pointerPosition"
+      :bubblePosition="currentTrump.pointerPosition"
     ></cvs>
 
     <div class="sidebar">
@@ -13,7 +13,7 @@
       <div class="trump-container">
         <ImageTile
           v-for="(trump, index) in trumps"
-          :isSelected="index === trumpIndex"
+          :isSelected="index === trumpStore.trumpIndex"
           @click.native="setTrump(index)"
           :key="trump.image"
           :name="trump.name"
@@ -45,38 +45,13 @@ import ImageTile from '../components/ImageTile.vue'
 import Heading from '../components/Heading.vue'
 import TextBox from '../components/TextBox.vue'
 
-import yelling from '@/assets/img/trumps/yelling.png'
-import smug from '@/assets/img/trumps/smug.png'
-import escapingHair from '@/assets/img/trumps/escaping_hair.png'
-import bald from '@/assets/img/trumps/bald.png'
+import { ACTIONS, GETTERS, useTrumpStore } from '@/stores/trump'
 
 // Reactive state
 const addHands = ref(true)
 const rawText = ref('')
-const trumpIndex = ref(0)
-
-const trumps = [
-  {
-    name: 'Yelling',
-    image: yelling,
-    pointerPosition: 200,
-  },
-  {
-    name: 'Smug',
-    image: smug,
-    pointerPosition: 170,
-  },
-  {
-    name: 'Bald',
-    image: bald,
-    pointerPosition: 160,
-  },
-  {
-    name: 'Comb-over',
-    image: escapingHair,
-    pointerPosition: 230,
-  },
-]
+const trumpStore = useTrumpStore()
+const trumps = trumpStore.trumps
 
 // Computed properties
 const rawTextWithEmoji = computed(() =>
@@ -94,13 +69,13 @@ const rawTextWithEmoji = computed(() =>
 
 const trumpQuote = computed(() => (addHands.value ? rawTextWithEmoji.value : rawText.value))
 
-const image = computed(() => trumps[trumpIndex.value].image)
+const currentTrump = computed(() => trumpStore[GETTERS.GET_CURRENT_TRUMP]())
 
 const shareUrl = computed(() => {
   const base = window.location.origin + window.location.pathname
   const url = new URL(window.location.href)
   const params = new URLSearchParams(url.search)
-  params.set('t', (trumpIndex.value + 1).toString())
+  params.set('t', (trumpStore.trumpIndex + 1).toString())
   params.set('h', addHands.value.toString())
   params.set('q', encodeURIComponent(rawText.value))
   url.search = params.toString()
@@ -108,7 +83,7 @@ const shareUrl = computed(() => {
 })
 
 const setTrump = (index: number) => {
-  trumpIndex.value = index
+  trumpStore[ACTIONS.SET_TRUMP](index)
 }
 
 const copy = async () => {
@@ -119,7 +94,7 @@ const copy = async () => {
 onMounted(() => {
   const { h, t, q } = Object.fromEntries(new URLSearchParams(window.location.search))
   addHands.value = h === 'true'
-  trumpIndex.value = parseInt(t) - 1 || 0
+  trumpStore[ACTIONS.SET_TRUMP](parseInt(t) - 1 || 0)
   rawText.value = q || ''
 })
 </script>
