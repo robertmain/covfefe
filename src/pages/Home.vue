@@ -25,7 +25,7 @@
       <Heading :level="3">Type Your Text Below</Heading><br />
       <TextBox :limit="280" placeholder="Many people say...." v-model="rawText">
         <template v-slot:left>
-          <label for="enableHands">Emojiis</label>
+          <label for="enableHands">Emojis</label>
           <input type="checkbox" id="enableHands" v-model="addHands" />
         </template>
       </TextBox>
@@ -39,51 +39,56 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import cvs from '../components/Canvas.vue'
 import ImageTile from '../components/ImageTile.vue'
 import Heading from '../components/Heading.vue'
 import TextBox from '../components/TextBox.vue'
 
-import { ACTIONS, GETTERS, useTrumpStore } from '@/stores/trump'
+import { ACTIONS as TRUMP_ACTIONS, GETTERS as TRUMP_GETTERS, useTrumpStore } from '@/stores/trump'
+import { ACTIONS as TEXT_ACTIONS, GETTERS as TEXT_GETTERS, useTextStore } from '@/stores/text'
+import { useRoute } from 'vue-router'
 
-// Reactive state
-const addHands = ref(true)
-const rawText = ref('')
 const trumpStore = useTrumpStore()
+const textStore = useTextStore()
+const route = useRoute()
+
+const addHands = computed({
+  get() {
+    return textStore.emoji
+  },
+  set(addHands: string) {
+    textStore[TEXT_ACTIONS.SET_EMOJI](addHands)
+  },
+})
+
 const trumps = trumpStore.trumps
+const rawText = computed({
+  get() {
+    return textStore.rawText
+  },
+  set(text: string) {
+    textStore[TEXT_ACTIONS.SET_TEXT](text)
+  },
+})
 
 // Computed properties
-const rawTextWithEmoji = computed(() =>
-  rawText.value
-    .split(' ')
-    .map(
-      (word) =>
-        word +
-        (Math.random() >= 0.5
-          ? ['☝', '👌', '🖐', '👋', '🤏', '👐'][Math.floor(Math.random() * 6)]
-          : ''),
-    )
-    .join(' '),
-)
-
-const trumpQuote = computed(() => (addHands.value ? rawTextWithEmoji.value : rawText.value))
-
-const currentTrump = computed(() => trumpStore[GETTERS.GET_CURRENT_TRUMP]())
+const trumpQuote = computed(() => textStore[TEXT_GETTERS.GET_TEXT]())
+const currentTrump = computed(() => trumpStore[TRUMP_GETTERS.GET_CURRENT_TRUMP]())
 
 const shareUrl = computed(() => {
   const base = window.location.origin + window.location.pathname
   const url = new URL(window.location.href)
   const params = new URLSearchParams(url.search)
   params.set('t', (trumpStore.trumpIndex + 1).toString())
-  params.set('h', addHands.value.toString())
+  params.set('h', textStore.emoji.toString())
   params.set('q', encodeURIComponent(rawText.value))
   url.search = params.toString()
   return url.toString()
 })
 
 const setTrump = (index: number) => {
-  trumpStore[ACTIONS.SET_TRUMP](index)
+  trumpStore[TRUMP_ACTIONS.SET_TRUMP](index)
 }
 
 const copy = async () => {
@@ -92,10 +97,13 @@ const copy = async () => {
 
 // Lifecycle hook
 onMounted(() => {
-  const { h, t, q } = Object.fromEntries(new URLSearchParams(window.location.search))
-  addHands.value = h === 'true'
-  trumpStore[ACTIONS.SET_TRUMP](parseInt(t) - 1 || 0)
-  rawText.value = q || ''
+  const { h: addHands, t: trump, q: quote } = route.query
+
+  textStore[TEXT_ACTIONS.SET_EMOJI](addHands?.toString() || 'false')
+  textStore[TEXT_ACTIONS.SET_TEXT](decodeURIComponent(quote?.toString() || ''))
+  if (trump) {
+    trumpStore[TRUMP_ACTIONS.SET_TRUMP](parseInt(trump.toString(), 10) - 1 || 0)
+  }
 })
 </script>
 
