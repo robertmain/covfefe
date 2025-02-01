@@ -16,7 +16,7 @@ const { name = '', isSelected = false } = defineProps<ImageTileProps>()
 
 <style lang="scss" scoped>
 div {
-  background-color: white;
+  background-color: var(--light-grey-1);
   overflow: hidden;
   padding: var(--spacing-xs);
   border: 1px solid var(--light-grey-3);
@@ -24,7 +24,7 @@ div {
 
   &.selected,
   &:hover {
-    background-color: var(--light-grey-1);
+    background-color: white;
     cursor: pointer;
   }
 }

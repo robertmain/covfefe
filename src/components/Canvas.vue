@@ -53,7 +53,6 @@ $color2: color.adjust($color1, $lightness: 5%, $space: hsl);
 
 .canvas {
   width: 100%;
-  height: 500px;
   padding: var(--spacing-md);
   box-sizing: border-box;
   display: grid;
