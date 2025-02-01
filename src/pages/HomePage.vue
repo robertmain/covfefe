@@ -1,20 +1,20 @@
 <template>
   <div class="grid">
-    <cvs
+    <trump-canvas
       ref="canvas"
       :image="currentTrump.image"
       :speech="trumpQuote"
       :bubblePosition="currentTrump.pointerPosition"
-    ></cvs>
+    ></trump-canvas>
 
     <div class="sidebar">
-      <Heading :level="3">Choose Your Trump</Heading><br />
+      <flexible-heading :level="3">Choose Your Trump</flexible-heading><br />
 
       <div class="trump-container">
         <ImageTile
           v-for="(trump, index) in trumps"
           :isSelected="index === trumpStore.trumpIndex"
-          @click.native="setTrump(index)"
+          @click="setTrump(index)"
           :key="trump.image"
           :name="trump.name"
           :image="trump.image"
@@ -22,7 +22,7 @@
         </ImageTile>
       </div>
 
-      <Heading :level="3">Type Your Text Below</Heading><br />
+      <flexible-heading :level="3">Type Your Text Below</flexible-heading><br />
       <TextBox :limit="280" placeholder="Many people say...." v-model="rawText">
         <template v-slot:left>
           <label for="enableHands">Emojis</label>
@@ -40,9 +40,9 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
-import cvs from '../components/Canvas.vue'
+import TrumpCanvas from '../components/TrumpCanvas.vue'
 import ImageTile from '../components/ImageTile.vue'
-import Heading from '../components/Heading.vue'
+import FlexibleHeading from '../components/FlexibleHeading.vue'
 import TextBox from '../components/TextBox.vue'
 
 import { ACTIONS as TRUMP_ACTIONS, GETTERS as TRUMP_GETTERS, useTrumpStore } from '@/stores/trump'

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-type RootStore = {}
+type RootStore = object
 
 export enum ACTIONS {}
 
