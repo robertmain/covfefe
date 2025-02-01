@@ -26,10 +26,10 @@ interface Props {
   cols?: number
   rows?: number
   limit?: number
-  value?: string
+  modelValue?: string
 }
 
-const { placeholder = '', cols = 30, rows = 6, limit = 40, value = '' } = defineProps<Props>()
+const { placeholder = '', cols = 30, rows = 6, limit = 40, modelValue = '' } = defineProps<Props>()
 
 // Reactive data
 const text = ref('')
@@ -41,7 +41,7 @@ const onInput = () => {
 const emit = defineEmits(['update:modelValue'])
 
 watch(
-  () => value,
+  () => modelValue,
   (newVal) => {
     if (newVal !== text.value) {
       text.value = newVal
