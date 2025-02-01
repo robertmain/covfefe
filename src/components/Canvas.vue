@@ -47,8 +47,9 @@ const textSize = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:color';
 $color1: #3b5998;
-$color2: lighten($color1, 5%);
+$color2: color.adjust($color1, $lightness: 5%, $space: hsl);
 
 .canvas {
   width: 100%;
