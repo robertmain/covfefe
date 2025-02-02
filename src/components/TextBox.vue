@@ -68,6 +68,7 @@ textarea {
   padding: var(--spacing-sm);
   display: grid;
   grid-template-columns: 50% 50%;
+  align-items: center;
   .left {
     grid-column-start: 1;
     grid-column-end: 2;
