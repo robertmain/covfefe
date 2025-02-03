@@ -119,9 +119,15 @@ div.grid {
 
 .trump-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   column-gap: 0.5rem;
   row-gap: 0.5rem;
+  @media (min-width: 500px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 div.sidebar {
