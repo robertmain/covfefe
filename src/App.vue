@@ -5,8 +5,9 @@
   </main>
 
   <footer>
+    <p>Art by <a href="http://theoatmeal.com">Matthew Inman</a></p>
     <p>
-      Art by <a href="http://theoatmeal.com">Matthew Inman</a>. TinyHand heading font by
+      TinyHand heading font by
       <a
         href="https://www.buzzfeednews.com/article/benking/tiny-hand-will-be-your-new-comic-sans#.ej9Mp8OlY"
         >Mark Davis</a
@@ -63,11 +64,12 @@ body {
   display: grid;
 }
 #app {
-  padding: 0px var(--spacing-md);
+  padding: 0px var(--spacing-sm);
   color: var(--mid-grey-2);
   display: grid;
   grid-template-columns: auto;
   @media (min-width: 768px) {
+    padding: 0px var(--spacing-md);
     margin: var(--spacing-sm) auto;
     width: 768px;
   }
@@ -93,6 +95,17 @@ footer {
   }
   a {
     color: var(--mid-orange);
+  }
+  p {
+    border-right: 1px solid var(--mid-grey-1);
+    display: inline-block;
+    padding-right: var(--spacing-sm);
+    margin-right: var(--spacing-sm);
+    &:last-of-type {
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
   }
 }
 p {
