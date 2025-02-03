@@ -9,7 +9,7 @@ export default {
       validator: (value: number) =>
         Number.isInteger(parseInt(value.toString())) &&
         parseInt(value.toString()) >= 0 &&
-        parseInt(value.toString()) <= 5,
+        parseInt(value.toString()) <= 6,
     },
   },
   setup(props, { slots }) {
