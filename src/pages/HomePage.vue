@@ -29,11 +29,7 @@
           <input type="checkbox" id="enableHands" v-model="addHands" />
         </template>
       </TextBox>
-
-      <div class="share">
-        <button class="prefix" @click="copy">Copy URL</button>
-        <input ref="urlBox" type="text" disabled :value="shareUrl" />
-      </div>
+      <ShareBox />
     </div>
   </div>
 </template>
@@ -44,6 +40,7 @@ import TrumpCanvas from '../components/TrumpCanvas.vue'
 import ImageTile from '../components/ImageTile.vue'
 import FlexibleHeading from '../components/FlexibleHeading.vue'
 import TextBox from '../components/TextBox.vue'
+import ShareBox from '@/components/ShareBox.vue'
 
 import { ACTIONS as TRUMP_ACTIONS, GETTERS as TRUMP_GETTERS, useTrumpStore } from '@/stores/trump'
 import { ACTIONS as TEXT_ACTIONS, GETTERS as TEXT_GETTERS, useTextStore } from '@/stores/text'
@@ -76,23 +73,8 @@ const rawText = computed({
 const trumpQuote = computed(() => textStore[TEXT_GETTERS.GET_TEXT]())
 const currentTrump = computed(() => trumpStore[TRUMP_GETTERS.GET_CURRENT_TRUMP]())
 
-const shareUrl = computed(() => {
-  const base = window.location.origin + window.location.pathname
-  const url = new URL(window.location.href)
-  const params = new URLSearchParams(url.search)
-  params.set('t', (trumpStore.trumpIndex + 1).toString())
-  params.set('h', textStore.emoji.toString())
-  params.set('q', encodeURIComponent(rawText.value))
-  url.search = params.toString()
-  return url.toString()
-})
-
 const setTrump = (index: number) => {
   trumpStore[TRUMP_ACTIONS.SET_TRUMP](index)
-}
-
-const copy = async () => {
-  await navigator.clipboard.writeText(shareUrl.value)
 }
 
 // Lifecycle hook
@@ -143,35 +125,6 @@ div.sidebar {
   @media (min-width: 992px) {
     grid-column-start: 2;
     grid-row-start: 1;
-  }
-}
-.share {
-  margin-top: spacing.$md;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 80px auto;
-  .prefix {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    font-family: 'Montserrat';
-    background-color: color.$light-grey-4;
-    color: color.$mid-grey-2;
-    text-align: right;
-    padding: spacing.$sm spacing.$xs;
-    border: 1px solid color.$light-grey-3;
-    cursor: pointer;
-    &:hover {
-      background-color: color.$light-grey-4;
-      color: white;
-    }
-  }
-  input[type='text'] {
-    grid-column-start: 2;
-    padding: spacing.$sm;
-    width: 100%;
-    display: block;
-    box-sizing: border-box;
-    border: 1px solid color.$light-grey-3;
   }
 }
 </style>

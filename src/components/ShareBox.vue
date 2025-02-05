@@ -1,0 +1,63 @@
+<template>
+  <div>
+    <button @click="copy" :title="buttonText">
+      {{ copiedMessage || buttonText }}
+    </button>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
+import { useTextStore } from '@/stores/text'
+import { useTrumpStore } from '@/stores/trump'
+
+const textStore = useTextStore()
+const trumpStore = useTrumpStore()
+
+const copiedMessage = ref('')
+
+const shareUrl = computed(() => {
+  const url = new URL(window.location.origin + window.location.pathname)
+  const params = new URLSearchParams(url.search)
+  params.set('t', (trumpStore.trumpIndex + 1).toString())
+  params.set('h', textStore.emoji.toString())
+  params.set('q', encodeURIComponent(textStore.rawText))
+  url.search = params.toString()
+  return url.toString()
+})
+
+const buttonText = computed(() => shareUrl.value)
+
+const copyToClipboard = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text)
+    return true
+  } catch {
+    return false
+  }
+}
+
+const copy = async () => {
+  copiedMessage.value = (await copyToClipboard(shareUrl.value)) ? 'Copied!' : 'Failed to copy'
+  setTimeout(() => {
+    copiedMessage.value = ''
+  }, 1500)
+}
+</script>
+
+<style lang="scss" scoped>
+@use '@/assets/style/spacing.scss';
+@use '@/assets/style/color.scss';
+
+div {
+  margin-top: spacing.$md;
+}
+button {
+  display: block;
+  width: 100%;
+  padding: spacing.$sm;
+  border: 1px solid color.$light-grey-3;
+  cursor: pointer;
+  word-wrap: break-word;
+}
+</style>
