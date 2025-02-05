@@ -108,6 +108,8 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/style/color.scss';
+@use '@/assets/style/spacing.scss';
 div.grid {
   display: grid;
   grid-template-columns: auto;
@@ -131,12 +133,12 @@ div.grid {
 }
 
 div.sidebar {
-  background-color: var(--light-grey-1);
+  background-color: color.$light-grey-1;
   grid-column-start: 1;
   grid-row-start: 1;
   grid-row-end: 2;
   overflow: hidden;
-  padding: var(--spacing-md);
+  padding: spacing.$md;
   box-sizing: border-box;
   @media (min-width: 992px) {
     grid-column-start: 2;
@@ -144,7 +146,7 @@ div.sidebar {
   }
 }
 .share {
-  margin-top: var(--spacing-md);
+  margin-top: spacing.$md;
   overflow: hidden;
   display: grid;
   grid-template-columns: 80px auto;
@@ -152,24 +154,24 @@ div.sidebar {
     grid-column-start: 1;
     grid-column-end: 2;
     font-family: 'Montserrat';
-    background-color: var(--light-grey-4);
-    color: var(--mid-grey-2);
+    background-color: color.$light-grey-4;
+    color: color.$mid-grey-2;
     text-align: right;
-    padding: var(--spacing-sm) var(--spacing-xs);
-    border: 1px solid var(--light-grey-3);
+    padding: spacing.$sm spacing.$xs;
+    border: 1px solid color.$light-grey-3;
     cursor: pointer;
     &:hover {
-      background-color: var(--light-grey-4);
+      background-color: color.$light-grey-4;
       color: white;
     }
   }
   input[type='text'] {
     grid-column-start: 2;
-    padding: var(--spacing-sm);
+    padding: spacing.$sm;
     width: 100%;
     display: block;
     box-sizing: border-box;
-    border: 1px solid var(--light-grey-3);
+    border: 1px solid color.$light-grey-3;
   }
 }
 </style>

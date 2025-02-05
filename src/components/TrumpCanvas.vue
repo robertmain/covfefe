@@ -48,12 +48,13 @@ const textSize = computed(() => {
 
 <style lang="scss" scoped>
 @use 'sass:color';
+@use '@/assets/style/spacing.scss';
 $color1: #3b5998;
 $color2: color.adjust($color1, $lightness: 5%, $space: hsl);
 
 .canvas {
   width: 100%;
-  padding: var(--spacing-md);
+  padding: spacing.$md;
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 220px 300px;
@@ -85,7 +86,7 @@ blockquote {
   color: white;
   overflow: hidden;
   box-sizing: border-box;
-  padding: var(--spacing-md);
+  padding: spacing.$md;
   font-family: 'TinyHand';
   line-height: 2.5;
   max-height: 460px;

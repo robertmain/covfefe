@@ -52,20 +52,22 @@ watch(
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/style/spacing.scss';
+@use '@/assets/style/color.scss';
 textarea {
   resize: none;
   line-height: 1.5;
-  color: var(--mid-grey-2);
-  border: 1px solid var(--light-grey-3);
+  color: color.$light-grey-2;
+  border: 1px solid color.$light-grey-3;
   width: 100%;
-  padding: var(--spacing-sm);
+  padding: spacing.$sm;
   margin-bottom: -2px;
   font-family: 'Montserrat';
   box-sizing: border-box;
 }
 .caption {
-  background-color: var(--light-grey-3);
-  padding: var(--spacing-sm);
+  background-color: color.$light-grey-3;
+  padding: spacing.$sm;
   display: grid;
   grid-template-columns: 50% 50%;
   align-items: center;

@@ -27,33 +27,35 @@ const tagLine = tagLines[randomIndex]
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/style/spacing.scss';
+@use '@/assets/style/color.scss';
 header {
   display: grid;
   grid-template-columns: max-content auto;
   align-items: center;
-  column-gap: var(--spacing-md);
-  margin: var(--spacing-sm) 0;
+  column-gap: spacing.$md;
+  margin: spacing.$sm 0;
 
   @media (min-width: 768px) {
-    margin: var(--spacing-md) 0;
+    margin: spacing.$md 0;
   }
 }
 
 h1 {
   font-size: 35px;
-  color: var(--mid-grey-3);
+  color: color.$mid-grey-3;
 }
 
 h2 {
   font-size: 15px;
-  margin-top: var(--spacing-md);
-  color: var(--mid-grey-2);
+  margin-top: spacing.$md;
+  color: color.$mid-grey-2;
 }
 img {
   width: 60px;
   margin: 0px;
   float: left;
-  margin-right: calc(-1 * var(--spacing-lg));
+  margin-right: calc(-1 * spacing.$lg);
   &:last-of-type {
     margin-right: initial;
   }

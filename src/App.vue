@@ -17,80 +17,45 @@
 </template>
 
 <script setup lang="ts">
-import 'reset.css'
 import AppTitle from '@/components/AppTitle.vue'
 </script>
 <style lang="scss">
-@import './assets/fonts/tinyhand/style.css';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-
-body {
-  background: repeating-conic-gradient(
-    from 0deg,
-    var(--mid-orange) 0deg 25deg,
-    var(--mid-yellow) 25deg 45deg
-  );
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  font-family: 'Montserrat';
-  font-size: 14px;
-  display: grid;
-}
+@use './assets/style/text.scss';
+@use './assets/style/color.scss';
+@use './assets/style/spacing.scss';
 #app {
-  padding: 0px var(--spacing-sm);
-  color: var(--mid-grey-2);
+  padding: 0px spacing.$sm;
+  color: color.$mid-grey-2;
   display: grid;
   grid-template-columns: auto;
   @media (min-width: 768px) {
-    padding: 0px var(--spacing-md);
-    margin: var(--spacing-sm) auto;
+    padding: 0px spacing.$md;
+    margin: spacing.$sm auto;
     width: 768px;
   }
+
   @media (min-width: 992px) {
     width: 992px;
   }
 }
-h1,
-h2,
-h3,
-h4 {
-  font-family: 'TinyHand';
-}
 main {
   background-color: white;
-  padding: var(--spacing-md);
+  padding: spacing.$md;
 }
+
 footer {
-  padding: var(--spacing-md);
-  background-color: var(--light-grey-1);
+  padding: spacing.$md;
+  background-color: color.$light-grey-1;
   p {
-    font-size: 13px;
-  }
-  a {
-    color: var(--mid-orange);
-  }
-  p {
-    border-right: 1px solid var(--mid-grey-1);
+    border-right: 1px solid color.$mid-grey-1;
     display: inline-block;
-    padding-right: var(--spacing-sm);
-    margin-right: var(--spacing-sm);
+    padding-right: spacing.$sm;
+    margin-right: spacing.$sm;
     &:last-of-type {
       border: none;
       margin: 0;
       padding: 0;
     }
-  }
-}
-p {
-  color: var(--mid-grey-1);
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-}
-a {
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
   }
 }
 </style>

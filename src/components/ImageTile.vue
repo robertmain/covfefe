@@ -15,11 +15,14 @@ const { name = '', isSelected = false } = defineProps<ImageTileProps>()
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/style/color.scss';
+@use '@/assets/style/spacing.scss';
+
 div {
-  background-color: var(--light-grey-1);
+  background-color: color.$light-grey-1;
   overflow: hidden;
-  padding: var(--spacing-xs);
-  border: 1px solid var(--light-grey-3);
+  padding: spacing.$sm;
+  border: 1px solid color.$light-grey-3;
   text-align: center;
 
   &.selected,

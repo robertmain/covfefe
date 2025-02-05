@@ -20,6 +20,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/style/spacing.scss';
 h1,
 h2,
 h3,
@@ -29,8 +30,8 @@ h6 {
   clear: both;
   display: block;
   float: none;
-  margin-bottom: var(--spacing-sm);
-  margin-top: var(--spacing-md);
+  margin-bottom: spacing.$sm;
+  margin-top: spacing.$md;
 
   &:first-of-type {
     margin-top: 0px;
