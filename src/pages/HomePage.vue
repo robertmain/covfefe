@@ -9,18 +9,7 @@
 
     <div class="sidebar">
       <flexible-heading :level="3">Choose Your Trump</flexible-heading><br />
-
-      <div class="trump-container">
-        <ImageTile
-          v-for="(trump, index) in trumps"
-          :isSelected="index === trumpStore.trumpIndex"
-          @click="setTrump(index)"
-          :key="trump.image"
-          :name="trump.name"
-          :image="trump.image"
-        >
-        </ImageTile>
-      </div>
+      <TrumpGrid :trumps="trumpStore.trumps" />
 
       <flexible-heading :level="3">Type Your Text Below</flexible-heading><br />
       <TextBox :limit="280" placeholder="Many people say...." v-model="rawText">
@@ -37,7 +26,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import TrumpCanvas from '../components/TrumpCanvas.vue'
-import ImageTile from '../components/ImageTile.vue'
+import TrumpGrid from '@/components/TrumpGrid.vue'
 import FlexibleHeading from '../components/FlexibleHeading.vue'
 import TextBox from '../components/TextBox.vue'
 import ShareBox from '@/components/ShareBox.vue'
@@ -59,7 +48,6 @@ const addHands = computed({
   },
 })
 
-const trumps = trumpStore.trumps
 const rawText = computed({
   get() {
     return textStore.rawText
@@ -72,10 +60,6 @@ const rawText = computed({
 // Computed properties
 const trumpQuote = computed(() => textStore[TEXT_GETTERS.GET_TEXT]())
 const currentTrump = computed(() => trumpStore[TRUMP_GETTERS.GET_CURRENT_TRUMP]())
-
-const setTrump = (index: number) => {
-  trumpStore[TRUMP_ACTIONS.SET_TRUMP](index)
-}
 
 // Lifecycle hook
 onMounted(() => {
@@ -100,20 +84,6 @@ div.grid {
   @media (min-width: 992px) {
   }
 }
-
-.trump-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 0.5rem;
-  row-gap: 0.5rem;
-  @media (min-width: 500px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  @media (min-width: 600px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 div.sidebar {
   background-color: color.$light-grey-1;
   grid-column-start: 1;
