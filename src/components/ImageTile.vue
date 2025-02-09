@@ -1,12 +1,17 @@
 <template>
-  <div :class="{ selected: isSelected }">
-    <img :src="image" alt="" /><br />
+  <li
+    :class="{ selected: isSelected }"
+    role="button"
+    :aria-pressed="isSelected ? 'true' : 'false'"
+    tabindex="0"
+  >
+    <img :src="image" :alt="`${name} Trump`" />
     <span>{{ name }}</span>
-  </div>
+  </li>
 </template>
 
 <script setup lang="ts">
-interface ImageTileProps {
+export interface ImageTileProps {
   image: string
   name?: string
   isSelected?: boolean
@@ -18,17 +23,24 @@ const { name = '', isSelected = false } = defineProps<ImageTileProps>()
 @use '@/assets/style/color.scss';
 @use '@/assets/style/spacing.scss';
 
-div {
+li {
   background-color: color.$light-grey-1;
-  overflow: hidden;
   padding: spacing.$sm;
   border: 1px solid color.$light-grey-3;
   text-align: center;
-
+  display: grid;
+  grid-template-rows: 4fr min-content;
   &.selected,
   &:hover {
     background-color: white;
     cursor: pointer;
+  }
+  &:focus {
+    outline: 2px solid color.$mid-blue-3;
+  }
+  img {
+    object-fit: contain;
+    width: 100%;
   }
 }
 
