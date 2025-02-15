@@ -19,42 +19,30 @@
 <script setup lang="ts">
 import AppTitle from '@/components/AppTitle.vue'
 </script>
-<style lang="scss">
-@use './assets/style/text.scss';
-@use './assets/style/color.scss';
-@use './assets/style/spacing.scss';
-#app {
-  padding: 0px spacing.$sm;
-  color: color.$mid-grey-2;
-  display: grid;
-  grid-template-columns: auto;
-  @media (min-width: 768px) {
-    padding: 0px spacing.$md;
-    margin: spacing.$sm auto;
-    width: 768px;
-  }
 
-  @media (min-width: 992px) {
-    width: 992px;
-  }
-}
+<style scoped>
 main {
-  background-color: white;
-  padding: spacing.$md;
+  @apply bg-white;
 }
 
 footer {
-  padding: spacing.$md;
-  background-color: color.$light-grey-1;
+  @apply p-4;
+  @apply bg-gray-100;
   p {
-    border-right: 1px solid color.$mid-grey-1;
-    display: inline-block;
-    padding-right: spacing.$sm;
-    margin-right: spacing.$sm;
+    @apply text-sm;
+    @apply text-gray-600;
+    @apply border-r;
+    @apply border-gray-500;
+    @apply pr-3;
+    @apply mr-3;
+    @apply inline-block;
+    a {
+      @apply text-orange-600;
+    }
     &:last-of-type {
-      border: none;
-      margin: 0;
-      padding: 0;
+      @apply border-0;
+      @apply mr-0;
+      @apply pr-0;
     }
   }
 }

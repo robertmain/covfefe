@@ -45,19 +45,16 @@ const copy = async () => {
 }
 </script>
 
-<style lang="scss" scoped>
-@use '@/assets/style/spacing.scss';
-@use '@/assets/style/color.scss';
-
+<style scoped>
 div {
-  margin-top: spacing.$md;
+  @apply mt-4;
 }
 button {
-  display: block;
-  width: 100%;
-  padding: spacing.$sm;
-  border: 1px solid color.$light-grey-3;
-  cursor: pointer;
-  word-wrap: break-word;
+  @apply break-all
+    cursor-pointer
+    border
+    border-gray-400
+    p-2
+    w-full;
 }
 </style>

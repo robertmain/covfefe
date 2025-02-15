@@ -10,7 +10,7 @@
       @input="onInput"
     ></textarea>
     <div class="caption">
-      <div class="left">
+      <div>
         <slot name="left"></slot>
       </div>
       <span class="text-remaining">Remaining: {{ limit - text.length }}</span>
@@ -55,29 +55,28 @@ watch(
 @use '@/assets/style/spacing.scss';
 @use '@/assets/style/color.scss';
 textarea {
-  resize: none;
-  line-height: 1.5;
-  color: color.$light-grey-2;
-  border: 1px solid color.$light-grey-3;
-  width: 100%;
-  padding: spacing.$sm;
-  margin-bottom: -2px;
-  font-family: 'Montserrat';
-  box-sizing: border-box;
+  @apply resize-none
+    text-gray-600
+    text-base
+    border
+    border-gray-300
+    w-full
+    p-2
+    mb-[-2px]
+    font-montserrat
+    font-thin
+    box-border;
 }
 .caption {
-  background-color: color.$light-grey-3;
-  padding: spacing.$sm;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  align-items: center;
-  .left {
-    grid-column-start: 1;
-    grid-column-end: 2;
-  }
+  @apply text-gray-600
+    text-base
+    bg-gray-300
+    p-3
+    grid
+    grid-cols-2
+    items-center;
   .text-remaining {
-    grid-column-start: 2;
-    text-align: right;
+    @apply text-right;
   }
 }
 </style>

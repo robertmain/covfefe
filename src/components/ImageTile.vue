@@ -19,39 +19,34 @@ export interface ImageTileProps {
 const { name = '', isSelected = false } = defineProps<ImageTileProps>()
 </script>
 
-<style lang="scss" scoped>
-@use '@/assets/style/color.scss';
-@use '@/assets/style/spacing.scss';
-
+<style scoped>
 li {
-  background-color: color.$light-grey-1;
-  padding: spacing.$sm;
-  border: 1px solid color.$light-grey-3;
-  text-align: center;
-  display: grid;
-  grid-template-rows: 4fr min-content;
+  @apply grid
+    grid-rows-[4fr_auto]
+    border
+    border-gray-400
+    p-1
+    bg-gray-200
+    text-center;
   &.selected,
   &:hover {
-    background-color: white;
-    cursor: pointer;
+    @apply bg-white
+      cursor-pointer;
   }
   &:focus {
-    outline: 2px solid color.$mid-blue-3;
+    @apply outline outline-2
+      outline-blue-600;
   }
   img {
-    object-fit: contain;
-    width: 100%;
+    @apply object-contain
+      w-full
+      max-h-[75px];
   }
-}
 
-img {
-  max-height: 75px;
-}
-
-span {
-  font-family: 'Tinyhand';
-  font-size: 10px;
-  clear: both;
-  float: none;
+  span {
+    @apply font-tinyhand
+      text-gray-600
+      text-[10px];
+  }
 }
 </style>

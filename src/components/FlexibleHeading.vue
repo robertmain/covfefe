@@ -19,22 +19,19 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@use '@/assets/style/spacing.scss';
+<style scoped>
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  clear: both;
-  display: block;
-  float: none;
-  margin-bottom: spacing.$sm;
-  margin-top: spacing.$md;
-
-  &:first-of-type {
-    margin-top: 0px;
-  }
+  @apply font-tinyhand
+    text-gray-600
+    mt-4
+    mb-2
+    clear-both
+    block
+    float-none;
 }
 </style>

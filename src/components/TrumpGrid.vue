@@ -27,18 +27,13 @@ const setTrump = (index: number) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 ul {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-columns: max-content;
-  column-gap: 0.5rem;
-  row-gap: 0.5rem;
-  @media (min-width: 500px) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  @media (min-width: 600px) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+  @apply grid
+    auto-cols-max
+    gap-2
+    grid-cols-4
+    sm:grid-cols-2
+    lg:grid-cols-4;
 }
 </style>

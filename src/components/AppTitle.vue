@@ -27,48 +27,43 @@ const tagLine = tagLines[randomIndex]
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/style/spacing.scss';
-@use '@/assets/style/color.scss';
 header {
-  display: grid;
-  grid-template-columns: max-content auto;
-  align-items: center;
-  column-gap: spacing.$md;
-  margin: spacing.$sm 0;
-
-  @media (min-width: 768px) {
-    margin: spacing.$md 0;
-  }
+  @apply grid
+    grid-cols-[max-content_auto]
+    items-center
+    gap-5
+    mb-4;
 }
-
+h1,
+h2 {
+  @apply font-tinyhand
+    text-gray-700;
+}
 h1 {
-  font-size: 35px;
-  color: color.$mid-grey-3;
+  @apply text-3xl
+    md:text-4xl
+    lg:text-5xl;
 }
 
 h2 {
-  font-size: 15px;
-  margin-top: spacing.$md;
-  color: color.$mid-grey-2;
+  @apply text-sm
+    md:text-base
+    lg:text-lg
+    mt-5;
 }
 img {
-  width: 60px;
-  margin: 0px;
-  float: left;
-  margin-right: calc(-1 * spacing.$lg);
+  @apply w-[60px]
+    float-left
+    -mr-8;
   &:last-of-type {
-    margin-right: initial;
+    @apply -mr-0;
   }
   @for $i from 1 through 3 {
     &:nth-child(#{$i}n) {
       transform: rotate(#{($i * 30) - 60}deg);
     }
   }
-  @media (min-width: 768px) {
-    width: 65px;
-  }
-  @media (min-width: 992px) {
-    width: 75px;
-  }
+  @apply sm:w-[65px];
+  @apply md:w-[75px];
 }
 </style>
