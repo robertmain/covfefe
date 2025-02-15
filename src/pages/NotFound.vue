@@ -1,8 +1,17 @@
 <template>
-  <TrumpCanvas :image="trump.image" :bubble-position="trump.pointerPosition" :speech="pageText" />
+  <Content>
+    <template #default>
+      <TrumpCanvas
+        :image="trump.image"
+        :bubble-position="trump.pointerPosition"
+        :speech="pageText"
+      />
+    </template>
+  </Content>
 </template>
 <script lang="ts" setup>
 import TrumpCanvas from '@/components/TrumpCanvas.vue'
+import Content from '@/components/Content.vue'
 import { useTextAnimation } from '@/composables/useTextAnimation'
 import { useTrumpStore } from '@/stores/trump'
 import { computed } from 'vue'
@@ -14,4 +23,3 @@ the👐 woke👐 DEI🤏 fake☝ news👋 media. Everone🖐 is saying it!👋 �
 
 const pageText = useTextAnimation(speechText)
 </script>
-<style lang="scss" scoped></style>
