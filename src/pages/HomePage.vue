@@ -1,5 +1,5 @@
 <template>
-  <Content>
+  <content-area>
     <template #default>
       <trump-canvas
         ref="canvas"
@@ -21,7 +21,7 @@
       </TextBox>
       <ShareBox />
     </template>
-  </Content>
+  </content-area>
 </template>
 
 <script setup lang="ts">
@@ -31,7 +31,7 @@ import TrumpGrid from '@/components/TrumpGrid.vue'
 import FlexibleHeading from '@/components/FlexibleHeading.vue'
 import TextBox from '@/components/TextBox.vue'
 import ShareBox from '@/components/ShareBox.vue'
-import Content from '@/components/Content.vue'
+import ContentArea from '@/components/ContentArea.vue'
 
 import { ACTIONS as TRUMP_ACTIONS, GETTERS as TRUMP_GETTERS, useTrumpStore } from '@/stores/trump'
 import { ACTIONS as TEXT_ACTIONS, GETTERS as TEXT_GETTERS, useTextStore } from '@/stores/text'

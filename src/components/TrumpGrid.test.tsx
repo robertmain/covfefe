@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, afterEach } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import TrumpGrid from './TrumpGrid.vue'
 import { createTestingPinia } from '@pinia/testing'
 import type { ImageTileProps } from './ImageTile.vue'

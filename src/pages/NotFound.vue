@@ -1,5 +1,5 @@
 <template>
-  <Content>
+  <content-area>
     <template #default>
       <TrumpCanvas
         :image="trump.image"
@@ -7,11 +7,11 @@
         :speech="pageText"
       />
     </template>
-  </Content>
+  </content-area>
 </template>
 <script lang="ts" setup>
 import TrumpCanvas from '@/components/TrumpCanvas.vue'
-import Content from '@/components/Content.vue'
+import ContentArea from '@/components/ContentArea.vue'
 import { useTextAnimation } from '@/composables/useTextAnimation'
 import { useTrumpStore } from '@/stores/trump'
 import { computed } from 'vue'
