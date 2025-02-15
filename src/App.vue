@@ -3,11 +3,10 @@
   <main>
     <router-view></router-view>
   </main>
-
   <footer>
     <p>Art by <a href="http://theoatmeal.com">Matthew Inman</a></p>
     <p>
-      TinyHand heading font by
+      Font by
       <a
         href="https://www.buzzfeednews.com/article/benking/tiny-hand-will-be-your-new-comic-sans#.ej9Mp8OlY"
         >Mark Davis</a
