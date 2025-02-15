@@ -21,7 +21,9 @@ const shareUrl = computed(() => {
   const params = new URLSearchParams(url.search)
   params.set('t', (trumpStore.trumpIndex + 1).toString())
   params.set('h', textStore.emoji.toString())
-  params.set('q', encodeURIComponent(textStore.rawText))
+  if (textStore.rawText.length > 0) {
+    params.set('q', encodeURIComponent(textStore.rawText))
+  }
   url.search = params.toString()
   return url.toString()
 })
