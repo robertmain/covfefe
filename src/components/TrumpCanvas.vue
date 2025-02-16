@@ -52,12 +52,12 @@ $color1: #3b5998;
 $color2: color.adjust($color1, $lightness: 5%, $space: hsl);
 
 .canvas {
-  width: 100%;
-  padding: var(--spacing-md);
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 220px 300px;
-  column-gap: 1rem;
+  @apply w-full
+    p-5
+    box-border
+    grid
+    grid-cols-[220px_300px]
+    gap-4;
   background: repeating-linear-gradient(
     -45deg,
     $color1 0px,
@@ -67,41 +67,32 @@ $color2: color.adjust($color1, $lightness: 5%, $space: hsl);
   );
 }
 
-img {
-  grid-column-start: 1;
-  grid-column-end: 2;
-}
-
 .quote-container {
-  grid-column-start: 2;
-  position: relative;
+  @apply relative;
 }
 
 blockquote {
-  min-height: 250px;
-  border-radius: 10px;
-  height: auto;
-  background: rgba(white, 0.3);
-  color: white;
-  overflow: hidden;
-  box-sizing: border-box;
-  padding: var(--spacing-md);
-  font-family: 'TinyHand';
-  line-height: 2.5;
-  max-height: 460px;
-  position: relative;
+  @apply min-h-[250px]
+    rounded-lg
+    bg-white/30
+    text-white
+    overflow-hidden
+    box-border
+    p-3
+    font-tinyhand
+    leading-[2.5]
+    max-h-[460]
+    relative;
 }
 
 .arrow {
-  position: absolute;
-  left: 0;
-  width: 0;
-  height: 0;
-  border: 50px solid transparent;
-  border-right-color: rgba(255, 255, 255, 0.3);
-  border-left: 0;
-  border-bottom: 0;
-  margin-top: -50px;
-  margin-left: -50px;
+  @apply absolute
+    border-[50px]
+    border-transparent
+    border-x-white/30
+    border-l-0
+    border-b-0
+    -mt-[50px]
+    -ml-[50px];
 }
 </style>

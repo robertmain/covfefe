@@ -1,0 +1,59 @@
+@use './style/text.scss';
+@use './style/color.scss';
+@use './style/spacing.scss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+  background: repeating-conic-gradient(
+    from 0deg,
+    color.$mid-orange 0deg 25deg,
+    color.$mid-yellow 25deg 45deg
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: grid;
+  font-family: 'Montserrat';
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+#app {
+  padding: 0px spacing.$sm;
+  color: color.$mid-grey-2;
+  display: grid;
+  grid-template-columns: auto;
+
+  @media (min-width: 768px) {
+    padding: 0px spacing.$md;
+    margin: spacing.$sm auto;
+    width: 768px;
+  }
+
+  @media (min-width: 992px) {
+    width: 992px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'TinyHand';
+}
+
+a {
+  color: color.$mid-orange;
+}
+p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: text.$paragraph-text-size-normal;
+  color: color.$mid-grey-1;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}

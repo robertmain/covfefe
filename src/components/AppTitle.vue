@@ -28,33 +28,42 @@ const tagLine = tagLines[randomIndex]
 
 <style lang="scss" scoped>
 header {
-  display: grid;
-  grid-template-columns: max-content auto;
-  align-items: center;
-  column-gap: var(--spacing-md);
+  @apply grid
+    grid-cols-[max-content_auto]
+    items-center
+    gap-5
+    mb-4;
 }
-
+h1,
+h2 {
+  @apply font-tinyhand
+    text-gray-700;
+}
 h1 {
-  font-size: 45px;
-  color: var(--mid-grey-3);
+  @apply text-3xl
+    md:text-4xl
+    lg:text-5xl;
 }
 
 h2 {
-  margin-top: var(--spacing-md);
-  color: var(--mid-grey-2);
+  @apply text-sm
+    md:text-base
+    lg:text-lg
+    mt-5;
 }
 img {
-  width: 75px;
-  margin: 0px;
-  float: left;
-  margin-right: calc(-1 * var(--spacing-lg));
+  @apply w-[60px]
+    float-left
+    -mr-8;
   &:last-of-type {
-    margin-right: initial;
+    @apply -mr-0;
   }
   @for $i from 1 through 3 {
     &:nth-child(#{$i}n) {
       transform: rotate(#{($i * 30) - 60}deg);
     }
   }
+  @apply sm:w-[65px];
+  @apply md:w-[75px];
 }
 </style>

@@ -1,3 +1,5 @@
+import './assets/fonts/tinyhand/style.css'
+import './assets/style.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { router } from './router'
