@@ -57,6 +57,7 @@ button {
     border
     border-gray-400
     p-2
-    w-full;
+    w-full
+    text-gray-800;
 }
 </style>

@@ -15,8 +15,7 @@
       <flexible-heading :level="3">Type Your Text Below</flexible-heading>
       <TextBox :limit="280" placeholder="Many people say...." v-model="rawText">
         <template v-slot:left>
-          <label for="enableHands">Emojis</label>
-          <input type="checkbox" id="enableHands" v-model="addHands" />
+          <ToggleCheckbox label="Emojis" v-model="addHands" />
         </template>
       </TextBox>
       <ShareBox />
@@ -36,6 +35,7 @@ import ContentArea from '@/components/ContentArea.vue'
 import { ACTIONS as TRUMP_ACTIONS, GETTERS as TRUMP_GETTERS, useTrumpStore } from '@/stores/trump'
 import { ACTIONS as TEXT_ACTIONS, GETTERS as TEXT_GETTERS, useTextStore } from '@/stores/text'
 import { useRoute } from 'vue-router'
+import ToggleCheckbox from '@/components/ToggleCheckbox.vue'
 
 const trumpStore = useTrumpStore()
 const textStore = useTextStore()
