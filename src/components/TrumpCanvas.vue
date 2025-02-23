@@ -13,7 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue'
+import { defineProps } from 'vue'
+import { useDynamicTextSize } from '@/composables/useDynamicTextSize'
 
 // Props
 const props = defineProps({
@@ -32,18 +33,7 @@ const props = defineProps({
     default: 100,
   },
 })
-
-// Computed property for dynamic text size
-const textSize = computed(() => {
-  const sizes = [20, 16, 12]
-  if (props.speech.length < 116) {
-    return sizes[0]
-  } else if (props.speech.length > 116 && props.speech.length < 246) {
-    return sizes[1]
-  } else {
-    return sizes[2]
-  }
-})
+const textSize = useDynamicTextSize(() => props.speech)
 </script>
 
 <style lang="scss" scoped>
