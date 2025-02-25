@@ -3,9 +3,7 @@
     <img :src="image" />
     <div class="quote-container">
       <blockquote :style="{ fontSize: `${textSize}px` }">
-        <span v-if="props.speech.length > 0">&quot;</span>
-        {{ props.speech.slice(0, 280) }}
-        <span v-if="props.speech.length > 0">&quot;</span>
+        <span v-if="props.speech.length > 0"> &quot;{{ text.slice(0, 280) }}&quot; </span>
       </blockquote>
       <div class="arrow" :style="{ top: `${bubblePosition}px` }"></div>
     </div>
@@ -13,7 +11,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue'
+import { defineProps, toRef } from 'vue'
+import { useDynamicTextSize } from '@/composables/useDynamicTextSize'
+import { useEmojis } from '@/composables/useEmojis'
+import { useTextStore } from '@/stores/text'
 
 // Props
 const props = defineProps({
@@ -32,18 +33,12 @@ const props = defineProps({
     default: 100,
   },
 })
-
-// Computed property for dynamic text size
-const textSize = computed(() => {
-  const sizes = [20, 16, 12]
-  if (props.speech.length < 116) {
-    return sizes[0]
-  } else if (props.speech.length > 116 && props.speech.length < 246) {
-    return sizes[1]
-  } else {
-    return sizes[2]
-  }
-})
+const textSize = useDynamicTextSize(() => props.speech)
+const textStore = useTextStore()
+const text = useEmojis(
+  toRef(() => props.speech),
+  toRef(() => textStore.emoji),
+)
 </script>
 
 <style lang="scss" scoped>

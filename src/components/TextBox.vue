@@ -76,7 +76,8 @@ textarea {
     grid-cols-2
     items-center;
   .text-remaining {
-    @apply text-right;
+    @apply text-right
+      text-sm;
   }
 }
 </style>

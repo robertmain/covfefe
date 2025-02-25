@@ -2,9 +2,8 @@
   <content-area>
     <template #default>
       <trump-canvas
-        ref="canvas"
         :image="currentTrump.image"
-        :speech="trumpQuote"
+        :speech="rawText"
         :bubblePosition="currentTrump.pointerPosition"
       ></trump-canvas>
     </template>
@@ -15,18 +14,20 @@
       <flexible-heading :level="3">Type Your Text Below</flexible-heading>
       <TextBox :limit="280" placeholder="Many people say...." v-model="rawText">
         <template v-slot:left>
-          <label for="enableHands">Emojis</label>
-          <input type="checkbox" id="enableHands" v-model="addHands" />
+          <ToggleCheckbox label="Emojis" v-model="addHands" />
         </template>
       </TextBox>
-      <ShareBox />
+      <share-button-container>
+        <ShareBox :clickHandler="copyLink" copySuccessMessage="Copied!">Copy Link</ShareBox>
+        <ShareBox :clickHandler="copyImage" copySuccessMessage="Copied!">Copy Image</ShareBox>
+      </share-button-container>
     </template>
   </content-area>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
-import TrumpCanvas from '@/components/TrumpCanvas.vue'
+import TrumpCanvas from '@/components/Canvas/TrumpCanvas.vue'
 import TrumpGrid from '@/components/TrumpGrid.vue'
 import FlexibleHeading from '@/components/FlexibleHeading.vue'
 import TextBox from '@/components/TextBox.vue'
@@ -36,6 +37,8 @@ import ContentArea from '@/components/ContentArea.vue'
 import { ACTIONS as TRUMP_ACTIONS, GETTERS as TRUMP_GETTERS, useTrumpStore } from '@/stores/trump'
 import { ACTIONS as TEXT_ACTIONS, GETTERS as TEXT_GETTERS, useTextStore } from '@/stores/text'
 import { useRoute } from 'vue-router'
+import ToggleCheckbox from '@/components/ToggleCheckbox.vue'
+import ShareButtonContainer from '@/components/ShareButtonContainer.vue'
 
 const trumpStore = useTrumpStore()
 const textStore = useTextStore()
@@ -52,18 +55,37 @@ const addHands = computed({
 
 const rawText = computed({
   get() {
-    return textStore.rawText
+    return textStore.text
   },
   set(text: string) {
-    textStore[TEXT_ACTIONS.SET_TEXT](text)
+    textStore.text = text
   },
 })
 
 // Computed properties
-const trumpQuote = computed(() => textStore[TEXT_GETTERS.GET_TEXT]())
 const currentTrump = computed(() => trumpStore[TRUMP_GETTERS.GET_CURRENT_TRUMP]())
 
-// Lifecycle hook
+const copyImage = async () => {
+  const canvas = document.querySelector<HTMLCanvasElement>('canvas')!
+  canvas.toBlob((blob) => {
+    navigator.clipboard.write([new ClipboardItem({ 'image/png': blob! })])
+  })
+}
+
+const copyLink = async () => {
+  const url = new URL(window.location.origin + window.location.pathname)
+  const params = new URLSearchParams(url.search)
+  params.set('t', (trumpStore.trumpIndex + 1).toString())
+  params.set('h', textStore.emoji.toString())
+  if (textStore.text.length > 0) {
+    params.set('q', encodeURIComponent(textStore.text))
+  }
+  url.search = params.toString()
+  try {
+    await navigator.clipboard.writeText(url.toString())
+  } catch {}
+}
+
 onMounted(() => {
   const { h: addHands, t: trump, q: quote } = route.query
 
