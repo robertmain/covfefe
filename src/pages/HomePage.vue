@@ -2,9 +2,8 @@
   <content-area>
     <template #default>
       <trump-canvas
-        ref="canvas"
         :image="currentTrump.image"
-        :speech="trumpQuote"
+        :speech="rawText"
         :bubblePosition="currentTrump.pointerPosition"
       ></trump-canvas>
     </template>
@@ -25,7 +24,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
-import TrumpCanvas from '@/components/TrumpCanvas.vue'
+import TrumpCanvas from '@/components/Canvas/TrumpCanvas.vue'
 import TrumpGrid from '@/components/TrumpGrid.vue'
 import FlexibleHeading from '@/components/FlexibleHeading.vue'
 import TextBox from '@/components/TextBox.vue'
@@ -52,15 +51,14 @@ const addHands = computed({
 
 const rawText = computed({
   get() {
-    return textStore.rawText
+    return textStore.text
   },
   set(text: string) {
-    textStore[TEXT_ACTIONS.SET_TEXT](text)
+    textStore.text = text
   },
 })
 
 // Computed properties
-const trumpQuote = computed(() => textStore[TEXT_GETTERS.GET_TEXT]())
 const currentTrump = computed(() => trumpStore[TRUMP_GETTERS.GET_CURRENT_TRUMP]())
 
 // Lifecycle hook

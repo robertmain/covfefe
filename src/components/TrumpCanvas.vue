@@ -3,9 +3,7 @@
     <img :src="image" />
     <div class="quote-container">
       <blockquote :style="{ fontSize: `${textSize}px` }">
-        <span v-if="props.speech.length > 0">&quot;</span>
-        {{ props.speech.slice(0, 280) }}
-        <span v-if="props.speech.length > 0">&quot;</span>
+        <span v-if="props.speech.length > 0"> &quot;{{ text.slice(0, 280) }}&quot; </span>
       </blockquote>
       <div class="arrow" :style="{ top: `${bubblePosition}px` }"></div>
     </div>
@@ -13,8 +11,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, toRef } from 'vue'
 import { useDynamicTextSize } from '@/composables/useDynamicTextSize'
+import { useEmojis } from '@/composables/useEmojis'
+import { useTextStore } from '@/stores/text'
 
 // Props
 const props = defineProps({
@@ -34,6 +34,11 @@ const props = defineProps({
   },
 })
 const textSize = useDynamicTextSize(() => props.speech)
+const textStore = useTextStore()
+const text = useEmojis(
+  toRef(() => props.speech),
+  toRef(() => textStore.emoji),
+)
 </script>
 
 <style lang="scss" scoped>

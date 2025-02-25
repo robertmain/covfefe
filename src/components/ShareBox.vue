@@ -21,14 +21,14 @@ const shareUrl = computed(() => {
   const params = new URLSearchParams(url.search)
   params.set('t', (trumpStore.trumpIndex + 1).toString())
   params.set('h', textStore.emoji.toString())
-  if (textStore.rawText.length > 0) {
-    params.set('q', encodeURIComponent(textStore.rawText))
+  if (textStore.text.length > 0) {
+    params.set('q', encodeURIComponent(textStore.text))
   }
   url.search = params.toString()
   return url.toString()
 })
 
-const buttonText = computed(() => shareUrl.value)
+const buttonText = computed(() => 'Share Link')
 
 const copyToClipboard = async (text: string) => {
   try {
