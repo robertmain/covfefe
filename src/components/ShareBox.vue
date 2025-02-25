@@ -5,16 +5,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, useSlots } from 'vue'
+import { ref } from 'vue'
 import { useTextStore } from '@/stores/text'
 import { useTrumpStore } from '@/stores/trump'
 
-const textStore = useTextStore()
-const trumpStore = useTrumpStore()
-
 const copiedMessage = ref('')
 
-const slots = useSlots()
 interface Props {
   buttonText: string
   clickHandler: () => Promise<void>
