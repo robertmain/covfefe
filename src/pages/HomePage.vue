@@ -17,7 +17,10 @@
           <ToggleCheckbox label="Emojis" v-model="addHands" />
         </template>
       </TextBox>
-      <ShareBox />
+      <share-button-container>
+        <ShareBox :clickHandler="copyLink" copySuccessMessage="Copied!">Copy Link</ShareBox>
+        <ShareBox :clickHandler="copyImage" copySuccessMessage="Copied!">Copy Image</ShareBox>
+      </share-button-container>
     </template>
   </content-area>
 </template>
@@ -35,6 +38,7 @@ import { ACTIONS as TRUMP_ACTIONS, GETTERS as TRUMP_GETTERS, useTrumpStore } fro
 import { ACTIONS as TEXT_ACTIONS, GETTERS as TEXT_GETTERS, useTextStore } from '@/stores/text'
 import { useRoute } from 'vue-router'
 import ToggleCheckbox from '@/components/ToggleCheckbox.vue'
+import ShareButtonContainer from '@/components/ShareButtonContainer.vue'
 
 const trumpStore = useTrumpStore()
 const textStore = useTextStore()
@@ -61,7 +65,27 @@ const rawText = computed({
 // Computed properties
 const currentTrump = computed(() => trumpStore[TRUMP_GETTERS.GET_CURRENT_TRUMP]())
 
-// Lifecycle hook
+const copyImage = async () => {
+  const canvas = document.querySelector<HTMLCanvasElement>('canvas')!
+  canvas.toBlob((blob) => {
+    navigator.clipboard.write([new ClipboardItem({ 'image/png': blob! })])
+  })
+}
+
+const copyLink = async () => {
+  const url = new URL(window.location.origin + window.location.pathname)
+  const params = new URLSearchParams(url.search)
+  params.set('t', (trumpStore.trumpIndex + 1).toString())
+  params.set('h', textStore.emoji.toString())
+  if (textStore.text.length > 0) {
+    params.set('q', encodeURIComponent(textStore.text))
+  }
+  url.search = params.toString()
+  try {
+    await navigator.clipboard.writeText(url.toString())
+  } catch {}
+}
+
 onMounted(() => {
   const { h: addHands, t: trump, q: quote } = route.query
 
