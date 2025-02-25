@@ -18,8 +18,8 @@
         </template>
       </TextBox>
       <share-button-container>
-        <ShareBox :clickHandler="copyLink" copySuccessMessage="Copied!">Copy Link</ShareBox>
-        <ShareBox :clickHandler="copyImage" copySuccessMessage="Copied!">Copy Image</ShareBox>
+        <ShareBox :clickHandler="copyLink" buttonText="Copy Link" copySuccessMessage="Copied!" />
+        <ShareBox :clickHandler="copyImage" buttonText="Share Image" copySuccessMessage="Copied!" />
       </share-button-container>
     </template>
   </content-area>

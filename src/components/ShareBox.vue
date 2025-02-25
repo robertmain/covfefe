@@ -15,12 +15,12 @@ const trumpStore = useTrumpStore()
 const copiedMessage = ref('')
 
 const slots = useSlots()
-const buttonText = computed(() => (slots.default ? slots.default()[0].children?.toString()! : ''))
 interface Props {
+  buttonText: string
   clickHandler: () => Promise<void>
   copySuccessMessage?: string
 }
-const { clickHandler, copySuccessMessage = 'Copied' } = defineProps<Props>()
+const { clickHandler, buttonText = '', copySuccessMessage = 'Copied' } = defineProps<Props>()
 
 const click = async () => {
   await clickHandler()
