@@ -5,22 +5,18 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, useSlots } from 'vue'
+import { ref } from 'vue'
 import { useTextStore } from '@/stores/text'
 import { useTrumpStore } from '@/stores/trump'
 
-const textStore = useTextStore()
-const trumpStore = useTrumpStore()
-
 const copiedMessage = ref('')
 
-const slots = useSlots()
-const buttonText = computed(() => (slots.default ? slots.default()[0].children?.toString()! : ''))
 interface Props {
+  buttonText: string
   clickHandler: () => Promise<void>
   copySuccessMessage?: string
 }
-const { clickHandler, copySuccessMessage = 'Copied' } = defineProps<Props>()
+const { clickHandler, buttonText = '', copySuccessMessage = 'Copied' } = defineProps<Props>()
 
 const click = async () => {
   await clickHandler()
