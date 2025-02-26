@@ -9,7 +9,7 @@
   />
   <v-text
     :config="{
-      text: `&quot;${text}&quot;`,
+      text: text.length > 0 ? `&quot;${text}&quot;` : '',
       fontFamily: 'TinyHand',
       width: width,
       height: height,
